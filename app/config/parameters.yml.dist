@@ -1,0 +1,37 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: vietnam
+    database_user: postgres
+    database_password: root
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport: smtp
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_host: smtp.yandex.ru
+    mailer_port: 465
+    mailer_default_user: info@viet-info.com
+    mailer_default_password: ~
+    mailer_error_user: admin@viet-info.com
+    mailer_error_password: ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    email_from: "%mailer_default_user%"
+    admin_email: oleg.egorovich@gmail.com
+    domain: viet-info.com
+
+    uploads.web_path_list:
+        EstateMedia: '/uploads/EstateMedia'
+
+    google_map_apikey : AIzaSyCPSUg1y-TDXM6N8hX4vD_eWdF4j8rzcsg
+    languages: en|ru|vn
+    web_dir: "%kernel.root_dir%/../web"
+
+    prod_mode: false

@@ -1,0 +1,22 @@
+{% for form in forms %}
+    <div class="media-form-container" data-media-id="{{ form.vars.value.id }}">
+        {% form_theme form '@Cabinet/form/theme/bootstrap_3_layout_raw_label.html.twig' %}
+        {{ form_start(form) }}
+            <div style="position: relative; display: inline-block; width: 100%" class="image-container">
+                {#{{ dump(form.vars.value.file) }}#}
+                {% if form.vars.value.file.type is defined and 'video' in form.vars.value.file.type %}
+                    <i class="fa fa-play-circle video-icon" aria-hidden="true"></i>
+                {% endif %}
+                <img src="{{ form.vars.value.file.thumbUrl|raw }}">
+                <div class="top-controls">
+                    {{ form_row(form.favorite) }}
+                    {{ form_row(form.delete) }}
+                </div>
+            </div>
+            <div class="bottom-controls">
+                {{ form_widget(form.description) }}
+                {{ form_widget(form.save) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endfor %}

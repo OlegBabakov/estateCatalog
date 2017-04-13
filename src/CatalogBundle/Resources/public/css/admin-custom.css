@@ -1,0 +1,18 @@
+.cke_contents {
+    height: 400px !important;
+}
+
+#image_upload_modal {
+    z-index: 9999;
+}
+
+.estate-data-form > div > .sonata-ba-field > div {
+    background: #eaeaea;
+    padding: 5px 10px;
+}
+
+.estate-data-form .sonata-ba-field .form-group {
+    width: 30%;
+    display: inline-block;
+    margin-right: 2%;;
+}

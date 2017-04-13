@@ -1,0 +1,21 @@
+CatalogBundle\Entity\SystemParameter:
+    type: entity
+    table: null
+    repositoryClass: CatalogBundle\Repository\SystemParameterRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        value:
+            type: text
+            nullable: true
+        type:
+            type: smallint
+    lifecycleCallbacks: {  }

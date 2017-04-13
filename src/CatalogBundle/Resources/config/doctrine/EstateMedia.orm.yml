@@ -1,0 +1,36 @@
+CatalogBundle\Entity\EstateMedia:
+    type: entity
+    table: null
+    repositoryClass: CatalogBundle\Repository\EstateMediaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        estate:
+            targetEntity: Estate
+            inversedBy: gallery
+            joinColumn:
+                name: estate
+                referencedColumnName: id
+                onDelete: CASCADE
+    fields:
+        description:
+            type: string
+            nullable: true
+        isMainThumb: #является ли медиа главным изображением объекта недвижимости
+            type: boolean
+            nullable: true
+        position: #индекс положения в фотоальбоме(сортировка)
+            type: smallint
+            nullable: true
+        file:
+            type: json
+            options:
+                jsonb: true
+        filePublicID:
+            type: string
+            nullable: true
+    lifecycleCallbacks: {  }

@@ -1,0 +1,18 @@
+#api.v1.album:
+#    type: rest
+#    resource: "@RestApiBundle/Controller/AlbumController.php"
+#    options:
+#        expose: true #make this route "public" for JS routing bundle
+#
+#api.v1.media:
+#    type: rest #album child resource
+#    parent: api.v1.album
+#    resource: "@RestApiBundle/Controller/MediaController.php"
+#    options:
+#        expose: true
+
+api.v1.estate:
+    type: rest
+    resource: "@RestApiBundle/Controller/EstateController.php"
+    options:
+        expose: true

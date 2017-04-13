@@ -1,0 +1,109 @@
+{% extends '@Catalog/template/base.html.twig' %}
+
+{% form_theme filterForm '@Catalog/form/theme/bootstrap_3_layout_awesome_checkbox.html.twig' %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+    <script src="{{ url('bazinga_jstranslation_js') }}?locales={{ app.request.locale|split('_')[0] }}"></script> {#TODO: Сделать чтобы на фронт не показывались все переводы#}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    {% include '@Catalog/template/assetic_block.html.twig' with {block : 'app_core.js'} only %}
+    {% include '@Catalog/template/assetic_block.html.twig' with {block : 'app_map.js'} only %}
+{% endblock javascript %}
+
+{% block body %}
+    <div class="container-fluid" id="page-map-catalog">
+        <div class="row" style="height: 100%">
+            <div class="col-xs-12 col-sm-8 map-container">
+                <div class="hidden-sm hidden-md hidden-lg" style="
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    z-index: 1;
+                ">
+                    <a class="btn btn-primary filter-btn filter-show-btn" href="#">{{ 'sidebar_show_filter'|trans }}</a>
+                </div>
+                <div id="map"></div>
+            </div>
+            <div class="col-sm-4 hidden-xs" id="sidebar">
+                <div id="sidebar-list">
+                    <div>
+                        <a class="btn btn-primary filter-btn filter-show-btn" href="#">{{ 'sidebar_show_filter'|trans }}</a>
+                    </div>
+                    <div id="sidebar-list-content">
+                    </div>
+                </div>
+                <div id="sidebar-gray" hidden>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar-filter">
+        <div class="scrollable-container">
+            <div class="form-container">
+                <a class="btn btn-default filter-btn" id="filter-hide-btn" href="#">{{ 'sidebar_hide_filter'|trans }}</a>
+                <hr>
+                {% include '@Catalog/widget/map_filter_form.html.twig' with {'form' : filterForm} only %}
+
+            </div>
+
+            <div id="filterPopover" class="popover left fade in" style="top: 0; left: initial; cursor: pointer; z-index: 10; display: none;">
+                <div class="arrow" style="top: 50%;"></div>
+                <div class="popover-content"></div>
+            </div>
+        </div>
+
+        <div style="
+                        top: 0;
+                        right: 0;
+                        background: #e2e2e2;
+                        position: absolute;
+                        height: 100%;
+                        width: 31%;
+                        min-width: 315px;
+                     "></div>
+
+        <div class="filter-bottom-panel">
+            <a class="btn btn-primary" id="search-btn">{{ 'filter_form_search'|trans }}</a>
+            <a id="clear-btn" style="font-weight: 600; border-bottom: 1px dotted #000; margin-left: 20px;">{{ 'clear'|trans }}</a>
+        </div>
+    </div>
+
+    {% include '@Catalog/page/estate/handlebars_templates.html.twig' %}
+
+    <style>
+        .modal-backdrop {
+            display: none;
+        }
+    </style>
+
+    <script>
+        var map = null;
+        var panorama = null;
+
+
+        function initMap() {
+            var uluru = {lat: 12.2489255, lng: 109.2077263};
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: uluru
+            });
+        }
+
+        $(function () {
+            EstateManager.getEstateList({}, function () {
+                CommandFlags.renderItemsInMapBounds = true;
+            });
+
+            $("html, body").css({
+                height: $(window).height()
+            });
+        })
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ google_map_apikey }}&callback=initMap"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+{% endblock body %}

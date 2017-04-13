@@ -1,0 +1,75 @@
+imports:
+    - { resource: services/forms.yml }
+
+services:
+#    Upload ------------------------------------------------------------------------------------------------------------
+    catalog.file_uploader:
+        class: CatalogBundle\Service\Upload\FileUploader
+        arguments: ['%kernel.root_dir%']
+
+    catalog.upload_listener:
+        class: CatalogBundle\Service\Upload\UploadListener
+        arguments: ['@catalog.file_uploader', '%uploads.web_path_list%']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, priority: 10 }
+            - { name: doctrine.event_listener, event: preUpdate,  priority: 10 }
+
+    catalog.thumb_generate_listener:
+        class: CatalogBundle\Service\Upload\ThumbGenerateListener
+        arguments: ['@liip_imagine.cache.manager', '@doctrine', '@request_stack']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, priority: 5 }
+            - { name: doctrine.event_listener, event: preUpdate,  priority: 5 }
+
+
+#   Manager ------------------------------------------------------------------------------------------------------------
+    catalog.estate_manager:
+          class: CatalogBundle\Service\manager\EstateManager
+          arguments: ["@doctrine", "@request_stack", '@currency_converter']
+
+
+#   Other --------------------------------------------------------------------------------------------------------------
+    catalog.string_utils:
+        class: CatalogBundle\Service\StringUtils
+        arguments: ['@request_stack']
+
+    currency_converter:
+        class: CatalogBundle\Service\CurrencyConverter
+        arguments: ['@service_container']
+
+    catalog.showcase_provider:
+          class: CatalogBundle\Service\ShowcaseProvider
+          arguments: ['@service_container']
+
+#   Emails -------------------------------------------------------------------------------------------------------------
+    email_helper:
+        class: CatalogBundle\Service\email\EmailHelperBase
+        arguments: ['@service_container']
+
+    catalog.email_helper:
+        class: CatalogBundle\Service\email\EmailHelper
+        parent: email_helper
+
+#    Listener ----------------------------------------------------------------------------------------------------------
+    app.locale_listener:
+        class: CatalogBundle\Service\Listener\LocaleListener
+        arguments: ['%kernel.default_locale%']
+        tags:
+            - { name: kernel.event_subscriber }
+
+
+#    TWIG --------------------------------------------------------------------------------------------------------------
+    twig.extension.localization:
+        class: CatalogBundle\Service\Twig\LocalizationExtension
+        arguments: ['@session']
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.showcase:
+        class: CatalogBundle\Service\Twig\ShowcaseExtension
+        arguments: ['@service_container']
+        public: false
+        tags:
+            - { name: twig.extension }
+

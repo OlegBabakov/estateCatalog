@@ -1,0 +1,49 @@
+{% extends '@Cabinet/template/base.html.twig' %}
+
+{% block head_title %}Desktop{% endblock %}
+{% block breadcrumb %}{% endblock breadcrumb %}
+
+{% block content %}
+    <div class="portlet light bordered">
+        <div class="portlet-body">
+            <div class="tiles">
+                <a class="tile bg-green-turquoise" href="{{ path('cabinet_estate_add') }}">
+                    <div class="tile-body">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name"> Add estate </div>
+                    </div>
+                </a>
+
+                <a class="tile bg-red-sunglo" href="{{ path('cabinet_estate_list') }}">
+                    <div class="tile-body">
+                        <i class="fa fa-building-o"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name"> Catalog </div>
+                        <div class="number">{{ estateQuantity }}</div>
+                    </div>
+                </a>
+                {#<div class="tile bg-green">#}
+                    {#<div class="tile-body">#}
+                        {#<i class="fa fa-envelope-o"></i>#}
+                    {#</div>#}
+                    {#<div class="tile-object">#}
+                        {#<div class="name"> Messages </div>#}
+                        {#<div class="number"> 5 </div>#}
+                    {#</div>#}
+                {#</div>#}
+                <a class="tile bg-blue-steel" href="{{ path('cabinet_profile') }}">
+                    <div class="corner"> </div>
+                    <div class="tile-body">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name"> Profile </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

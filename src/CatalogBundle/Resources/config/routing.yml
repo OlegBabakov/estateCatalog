@@ -1,0 +1,11 @@
+estate_routing:
+    resource: "routing/estate.yml"
+    prefix:   /estate
+
+mainpage:
+    path:     /
+    defaults: { _controller: CatalogBundle:Map:index }
+
+map:
+    path:     /map
+    defaults: { _controller: CatalogBundle:Map:index }

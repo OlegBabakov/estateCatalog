@@ -1,0 +1,51 @@
+{% block main %}
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>viet-info.com</title>
+    </head>
+    <body bgcolor="#FFFFFF">
+
+    <table width="100%">
+        <tr>
+            <td align="center">
+                {% block header %}
+                {% endblock %}
+
+                <table width="60%" style="margin-top: 20px">
+                    <tr>
+                        <td style="width: 100%; border: 15px solid #00a7d0; padding: 20px">
+                            {% block hello %}
+                                <h3>Здравствуйте</h3>
+                            {% endblock %}
+                            {% block body %}
+                            {% endblock %}
+                        </td>
+                    </tr>
+                </table>
+
+                {% block footer %}
+                    <table width="60%" style="margin-top: 20px">
+                        <tr>
+                            <td>
+                                ©2016 {{ domain }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {% block contacts %}
+                                    <a href="mailto:{{ contactEmail }}">{{ contactEmail }}</a>
+                                {% endblock %}
+                            </td>
+                        </tr>
+                    </table>
+                {% endblock %}
+            </td>
+        </tr>
+    </table>
+
+    </body>
+    </html>
+{% endblock main %}

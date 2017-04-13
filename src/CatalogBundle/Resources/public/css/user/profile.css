@@ -1,0 +1,31 @@
+.profile {
+    border: 1px solid #a8a8a8;
+    background: #fafafa;
+    margin: 0 0;
+    padding: 10px 10px;
+}
+
+.profile .contact_avatar {
+    display: inline-block;
+    float: none;
+    margin-right: 10px;
+    width: 33%;
+    height: 33%;
+    max-width: 100px;
+    -webkit-border-radius: 50%!important;
+    -moz-border-radius: 50%!important;
+    border-radius: 50%!important;
+}
+
+.profile .contact-info {
+    line-height: 28px;
+    font-size: 13pt;
+}
+
+.profile .username {
+    display: inline-block;
+    /* text-align: center; */
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 4px 0;
+}

@@ -1,0 +1,11 @@
+estate_routing:
+    resource: "routing/estate.yml"
+    prefix:   /estate
+
+profile_routing:
+    resource: "routing/profile.yml"
+    prefix:   /profile
+
+cabinet_mainpage:
+    path:     /
+    defaults: { _controller: CabinetBundle:Main:index }

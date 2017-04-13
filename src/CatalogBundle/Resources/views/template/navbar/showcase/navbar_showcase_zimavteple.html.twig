@@ -1,0 +1,72 @@
+{# TODO: подумать как сделать именно наследование отдельных блоков от базового шаблона #}
+
+<div class="navbar navbar-main navbar-custom navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="http://zimavteple.ru" title="Перейти на основной сайт">
+            Zima v <span style="color: #FC7285">Teple</span>
+        </a>
+        <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li class="active"><a href="{{ path('map') }}">{{ 'map'|trans }}</a></li>
+            {#<li><a href="#">{{ 'navbar_catalog'|trans }}</a></li>#}
+
+            <li>
+                <a class="dropdown-toggle" type="button" data-toggle="dropdown">
+                    Услуги
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="http://zimavteple.ru/spisok-moix-uslug.html">Список всех услуг</a>
+                    </li>
+                    <li>
+                        <a href="http://zimavteple.ru/kak-poluchit-vid-na-zhitelstvo-vo-vetname.html">Вид на жительство</a>
+                    </li>
+                    <li>
+                        <a href="http://zimavteple.ru/razreshenie-na-rabotu-vo-vetname-work-permit.html">Разрешение на работу</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active"><a href="http://zimavteple.ru/category/ekskursii">Экскурсии</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            {% include '@Catalog/template/navbar/localization.html.twig' %}
+        </ul>
+
+    </div>
+</div>
+
+<style>
+    .navbar-custom {
+        background: #426467;
+    }
+
+    .navbar-custom li>a:hover, .navbar-custom li>a:focus, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+        background-color: #426467;
+        color: #FC7285;
+    }
+
+    .navbar-nav>li>.dropdown-menu {
+        background: #758D80;
+        margin-top: 3px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .navbar-fixed-top .dropdown-menu>li>a {
+        display: block;
+        padding: 10px 30px;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #fff;
+        white-space: nowrap;
+    }
+</style>

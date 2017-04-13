@@ -1,0 +1,33 @@
+cabinet_estate_add:
+    path:     /add
+    defaults: { _controller: CabinetBundle:Estate:add }
+
+cabinet_estate_edit:
+    path:     /{id}/edit
+    defaults: { _controller: CabinetBundle:Estate:edit }
+
+cabinet_estate_list:
+    path:     /list
+    defaults: { _controller: CabinetBundle:Estate:list }
+
+cabinet_estate_delete:
+    path:     /{id}/delete
+    defaults: { _controller: CabinetBundle:Estate:delete }
+    options:
+        expose: true
+
+cabinet_estate_media_edit:
+    path:     /media/{id}/edit
+    defaults: { _controller: CabinetBundle:EstateMedia:estateMediaEdit }
+
+cabinet_estate_media_positions:
+    path:     /{id}/gallery/positions
+    defaults: { _controller: CabinetBundle:EstateMedia:setGalleryPositions }
+
+cabinet_estate_gallery_update:
+    path:     /{id}/gallery/update
+    defaults: { _controller: CabinetBundle:Estate:galleryUpdateEvent }
+
+cabinet_estate_video_add:
+    path:     /{id}/video/add
+    defaults: { _controller: CabinetBundle:EstateMedia:videoAdd }

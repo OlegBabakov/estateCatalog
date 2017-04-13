@@ -1,0 +1,58 @@
+UserBundle\Entity\User:
+    type: entity
+    table: '`user`'
+    repositoryClass: UserBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    gedmo:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
+    fields:
+        firstName:
+            type: string
+            nullable: true
+        secondName:
+            type: string
+            nullable: true
+        avatar:
+            type: json
+            nullable: true
+            options:
+                jsonb: true
+        profile:
+            type: json
+            nullable: true
+            options:
+                jsonb: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        deletedAt:
+            type: date
+            nullable: true
+
+#    attributeOverride:
+#        email:
+#            type: string
+#            length: 255
+#            nullable: true
+#            unique: false
+#        emailCanonical:
+#            column: email_canonical
+#            type: string
+#            length: 255
+#            unique: false
+#            nullable: true
+    lifecycleCallbacks: {  }

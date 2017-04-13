@@ -1,0 +1,43 @@
+{% extends "@User/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="card card-container">
+            <div class="form-group">
+                <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+                <p id="profile-name" class="profile-name-card"></p>
+            </div>
+
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <div class="form-group">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'profile.show.email'|trans }}" class="form-control" autofocus />
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}" class="form-control"/>
+                </div>
+                <div id="remember" class="checkbox">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" id="_submit" name="_submit">
+                    {{ 'security.login.submit'|trans }}
+                </button>
+                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-block btn-newuser">{{ 'layout.register'|trans }}</a>
+            </form>
+            <a href="{{ path('fos_user_resetting_request') }}" class="forgot-password">
+                {{ 'resetting.request.submit'|trans }}
+            </a>
+        </div>
+    </div>
+
+{% endblock body %}

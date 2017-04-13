@@ -1,0 +1,244 @@
+{% extends '@Cabinet/template/base.html.twig' %}
+
+{% block head %}{% endblock head %}
+
+{% block content %}
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption font-dark">
+                <i class="fa fa-list-ul font-dark"></i>
+                <span class="caption-subject bold uppercase">Catalog</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a id="sample_editable_1_new" href="{{ path('cabinet_estate_add') }}" class="btn sbold green"> Add New
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="btn-group pull-right">
+                            {#<button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Tools#}
+                                {#<i class="fa fa-angle-down"></i>#}
+                            {#</button>#}
+                            {#<ul class="dropdown-menu pull-right">#}
+                                {#<li>#}
+                                    {#<a href="javascript:;">#}
+                                        {#<i class="fa fa-print"></i> Print </a>#}
+                                {#</li>#}
+                                {#<li>#}
+                                    {#<a href="javascript:;">#}
+                                        {#<i class="fa fa-file-pdf-o"></i> Save as PDF </a>#}
+                                {#</li>#}
+                                {#<li>#}
+                                    {#<a href="javascript:;">#}
+                                        {#<i class="fa fa-file-excel-o"></i> Export to Excel </a>#}
+                                {#</li>#}
+                            {#</ul>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                <thead>
+                <tr>
+                    <th>
+                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                            <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                            <span></span>
+                        </label>
+                    </th>
+                    <th> Photo </th>
+                    <th> Id </th>
+                    <th> {{'title'|trans}} </th>
+                    <th> {{'estate_property_type'|trans}} </th>
+                    <th> {{'price_sell'|trans}} </th>
+                    <th> {{'price_rent'|trans}} </th>
+                    <th> Actions </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for estate in estateList %}
+                        <tr class="odd gradeX">
+                            <td>
+                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                    <input type="checkbox" class="checkboxes" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <img src="{{ estate.image.thumbSmallUrl|default('/img/estate-gallery-preload.png') }}" style="max-height: 150px;">
+                            </td>
+                            <td> {{ estate.id }} </td>
+                            <td> {{ estate.title }} </td>
+                            <td>
+                                {{ ('estate_type_'~estate.estateType)|trans }}
+                            </td>
+                            <td class="center"> {{ estate.priceSell }} </td>
+                            <td class="center"> {{ estate.priceRent }} </td>
+                            <td>
+                                <a href="{{ path('cabinet_estate_edit', {id : estate.id}) }}" class="btn btn-sm blue-steel">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="{{ path('estate_show', {id : estate.id}) }}" target="_blank" class="btn btn-sm green-sharp">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="{{ path('cabinet_estate_delete', {id : estate.id}) }}" class="btn btn-sm red-thunderbird" >
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <div class="btn-group">
+                                    {#<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions#}
+                                    {#<i class="fa fa-angle-down"></i>#}
+                                    {#</button>#}
+                                    {#<ul class="dropdown-menu pull-left" role="menu">#}
+                                    {#<li>#}
+                                    {#<a href="javascript:;">#}
+                                    {#<i class="icon-docs"></i> New Post </a>#}
+                                    {#</li>#}
+                                    {#<li>#}
+                                    {#<a href="javascript:;">#}
+                                    {#<i class="icon-tag"></i> New Comment </a>#}
+                                    {#</li>#}
+                                    {#<li>#}
+                                    {#<a href="javascript:;">#}
+                                    {#<i class="icon-user"></i> New User </a>#}
+                                    {#</li>#}
+                                    {#<li class="divider"> </li>#}
+                                    {#<li>#}
+                                    {#<a href="javascript:;">#}
+                                    {#<i class="icon-flag"></i> Comments#}
+                                    {#<span class="badge badge-success">4</span>#}
+                                    {#</a>#}
+                                    {#</li>#}
+                                    {#</ul>#}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+
+    <script>
+        var TableDatatablesManaged = function () {
+
+            var initTable1 = function () {
+
+                var table = $('#sample_1');
+
+                // begin first table
+                table.dataTable({
+
+                    // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+                    "language": {
+                        "aria": {
+                            "sortAscending": ": activate to sort column ascending",
+                            "sortDescending": ": activate to sort column descending"
+                        },
+                        "emptyTable": "No data available in table",
+                        "info": "Showing _START_ to _END_ of _TOTAL_ records",
+                        "infoEmpty": "No records found",
+                        "infoFiltered": "(filtered1 from _MAX_ total records)",
+                        "lengthMenu": "Show _MENU_",
+                        "search": "Search:",
+                        "zeroRecords": "No matching records found",
+                        "paginate": {
+                            "previous":"Prev",
+                            "next": "Next",
+                            "last": "Last",
+                            "first": "First"
+                        }
+                    },
+
+                    // Or you can use remote translation file
+                    //"language": {
+                    //   url: '//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Portuguese.json'
+                    //},
+
+                    // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                    // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+                    // So when dropdowns used the scrollable div should be removed.
+                    //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+
+                    "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                    "lengthMenu": [
+                        [10, 25, 50, 100, -1],
+                        [10, 25, 50, 100, "All"] // change per page values here
+                    ],
+                    // set the initial value
+                    "pageLength": 5,
+                    "pagingType": "bootstrap_full_number",
+                    "columnDefs": [
+                        {  // set default column settings
+                            'orderable': false,
+                            'targets': [0]
+                        },
+                        {
+                            "searchable": false,
+                            "targets": [0]
+                        },
+                        {
+                            "className": "dt-right",
+                            //"targets": [2]
+                        }
+                    ],
+                    "order": [
+                        [1, "asc"]
+                    ] // set first column as a default sort by asc
+                });
+
+                var tableWrapper = jQuery('#sample_1_wrapper');
+
+                table.find('.group-checkable').change(function () {
+                    var set = jQuery(this).attr("data-set");
+                    var checked = jQuery(this).is(":checked");
+                    jQuery(set).each(function () {
+                        if (checked) {
+                            $(this).prop("checked", true);
+                            $(this).parents('tr').addClass("active");
+                        } else {
+                            $(this).prop("checked", false);
+                            $(this).parents('tr').removeClass("active");
+                        }
+                    });
+                });
+
+                table.on('change', 'tbody tr .checkboxes', function () {
+                    $(this).parents('tr').toggleClass("active");
+                });
+            };
+
+            return {
+                //main function to initiate the module
+                init: function () {
+                    if (!jQuery().dataTable) {
+                        return;
+                    }
+                    initTable1();
+                }
+
+            };
+
+        }();
+
+        if (App.isAngularJsApp() === false) {
+            jQuery(document).ready(function() {
+                TableDatatablesManaged.init();
+            });
+        }
+    </script>
+
+    <style>
+        .page-content-wrapper .page-content {
+            padding: 0 0 0 20px !important;
+        }
+    </style>
+{% endblock content %}

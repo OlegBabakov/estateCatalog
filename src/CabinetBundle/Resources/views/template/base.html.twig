@@ -1,0 +1,149 @@
+{% if form is defined %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% endif %}
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Metronic | Tiles</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    {% block style %}
+        {#Compiling all files in one by assetic bundle#}
+        {% stylesheets
+        'vendor/components-font-awesome/css/font-awesome.min.css'
+        'vendor/bootstrap/dist/css/bootstrap.min.css'
+
+        'bundles/cabinet/global/plugins/simple-line-icons/simple-line-icons.min.css'
+        'bundles/cabinet/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css'
+
+        'bundles/cabinet/global/plugins/select2/css/select2.min.css'
+        'bundles/cabinet/global/plugins/select2/css/select2-bootstrap.min.css'
+        'bundles/cabinet/global/plugins/jquery-multi-select/css/multi-select.css'
+
+        'bundles/cabinet/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'
+        'bundles/cabinet/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css'
+
+        'bundles/cabinet/global/plugins/dropzone/dropzone.min.css'
+        'bundles/cabinet/global/plugins/dropzone/basic.min.css'
+
+        'bundles/cabinet/global/css/components.min.css'
+        'bundles/cabinet/global/css/plugins.min.css'
+        'bundles/cabinet/global/plugins/bootstrap-summernote/summernote.css'
+
+        'bundles/cabinet/layouts/layout4/css/layout.css'
+        'bundles/cabinet/layouts/layout4/css/themes/default.min.css'
+        'bundles/cabinet/layouts/layout4/css/custom.min.css'
+        filter='cssrewrite' output='css/app_cabinet.css'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock style %}
+
+    {% block javascript %}
+        <script src="{{ asset('bundles/cabinet/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
+
+        <script src="{{ asset('bundles/cabinet/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/js.cookie.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+
+
+        {#<script src="{{ asset('bundles/cabinet/layouts/global/scripts/quick-sidebar.min.js') }}" type="text/javascript"></script>#}
+        <script src="{{ asset('bundles/cabinet/global/plugins/jquery-multi-select/js/jquery.multi-select.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
+
+        <script src="{{ asset('bundles/cabinet/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/dropzone/dropzone.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/bootbox/bootbox.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/plugins/bootstrap-summernote/summernote.min.js') }}" type="text/javascript"></script>
+
+        <script src="{{ asset('bundles/cabinet/global/scripts/custom.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/global/scripts/fields.js') }}" type="text/javascript"></script>
+
+        <script src="{{ asset('bundles/cabinet/global/scripts/app.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/cabinet/layouts/layout4/scripts/layout.min.js') }}" type="text/javascript"></script>
+
+        {#FOS JS ROUTING#}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {% endblock javascript %}
+
+</head>
+<!-- END HEAD -->
+
+<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
+{% include '@Cabinet/template/navbar/navbar.html.twig' %}
+
+{% block container %}
+<div class="page-container">
+    {% include '@Cabinet/template/sidebar.html.twig' %}
+
+    <div class="page-content-wrapper">
+        {% block body %}
+            <div class="page-content">
+                {% block flash %}
+                    {% include '@Cabinet/template/flashbag.html.twig' %}
+                {% endblock %}
+
+                {% block head %}
+                    <div class="page-head">
+                        <div class="page-title">
+                            <h1>{% block head_title %}Title{% endblock head_title %}
+                                <small>{% block head_title_small %}{% endblock head_title_small %}</small>
+                            </h1>
+                        </div>
+                    </div>
+
+                    {% block breadcrumb %}
+                        <ul class="page-breadcrumb breadcrumb">
+                            <li>
+                                <a href="index.html">Home</a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                            <li>
+                                <span class="active">UI Features</span>
+                            </li>
+                        </ul>
+                    {% endblock breadcrumb %}
+                {% endblock head %}
+
+                {% block content %}
+                {% endblock content %}
+            </div>
+        {% endblock body %}
+    </div>
+
+
+</div>
+{% endblock container %}
+
+<div class="page-footer">
+    <div class="page-footer-inner">
+        {% block footer %}
+        {% endblock footer %}
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+</div>
+
+
+</body>
+</html>

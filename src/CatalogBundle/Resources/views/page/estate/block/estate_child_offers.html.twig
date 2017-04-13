@@ -1,0 +1,125 @@
+{% for estate in estateList %}
+    <a class="row clild-offer" href="{{ path('estate_show', {id : estate.id}) }}" target="_blank">
+        <div class="col-xs-6">
+            <div class="image-container">
+                {% set frameScrubId = 'frameScrub'~loop.index %}
+                {% if estate.gallery|length %}
+                    <div id="{{ frameScrubId }}" style="width: 100%; height: 75%; min-height: 250px; overflow:hidden;" class="frameScrub">
+                        {% for media in estate.gallery %}
+                            {% if loop.index <= 4 %} {#Показывать только 4 картинки в превью#}
+                                <img data-src="{{media.file.thumbUrl}}" src="/img/sidebar-home-preload.png" class="estate-thumb lazy" style="position: absolute;"/>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="img-counter">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
+                        <span id="{{ frameScrubId }}-imgCounter">1</span> / {{estate.gallery|length}}
+                    </div>
+                {% else %}
+                    <img src="/img/sidebar-home-preload.png" />
+                {% endif %}
+
+                {% if "seaview" in estate.data.facilities %}
+                    <img src="{{ asset('img/icon/seaview.png') }}" title="{{ 'facilities_seaview'|trans }}" class="icon-seaview" />
+                {% endif %}
+
+                {% for media in estate.gallery %}
+                    {% if media.file.isVideo is defined %}
+                        <div class="sidebar-video-play">
+                            <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-xs-6 result-text p-t-1">
+            {% if estate.estateType == 'building' %}
+                <span class="price">{{estate.title}}</span><br>
+            {% endif %}
+
+            {% if estate.priceSell %}
+                <i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="price" >{{ 'price_sell'|trans }} : {{ estate.priceSell|number_format(0, '.', ',') }} {{ currencySymbol|raw }}</span><br>
+            {% endif %}
+
+            {% if estate.priceRent %}
+                <i class="fa fa-key fa-fw" aria-hidden="true"></i><span class="price" >{{ 'price_rent'|trans }} : {{estate.priceRent|number_format(0, '.', ',') }} {{ currencySymbol|raw }}/{{ 'month-short'|trans }}</span><br>
+            {% endif %}
+
+            {% if estate.data.area.total %}
+                <i class="fa fa-square-o fa-fw" aria-hidden="true"></i>
+                {{ 'estate_area'|trans }}:
+                    {{ 'estate_area_total'|trans }} {{estate.data.area.total}} m<sup>2</sup>;
+                <br>
+            {% endif %}
+
+            {#{% if estate.data.floor or estate.data.building.floors %}#}
+                {#<i class="fa fa-bars fa-fw" aria-hidden="true"></i>#}
+                {#{% if estate.estateType != "building" %}#}
+                    {#<span title="{{ 'estate_floor'|trans }}">#}
+                        {#{% if estate.data.floor %}#}
+                            {#{{estate.data.floor}}#}
+                        {#{% else %}#}
+                            {#?#}
+                        {#{% endif %}#}
+                    {#</span>#}
+
+                    {#{% if estate.data.building.floors %}#}
+                        {#/&nbsp;#}
+                    {#{% endif %}#}
+                    {##}
+                {#{% endif %}#}
+
+                {#{% if estate.data.building.floors %}#}
+                    {#<span title="{{ 'building_floors'|trans }}">#}
+                        {#{{estate.data.building.floors}}#}
+                    {#</span>#}
+                {#{% endif %}#}
+                {#<br>#}
+            {#{% endif %}#}
+
+            {% if estate.data.floor or estate.data.building.floors %}
+                <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+                {% if estate.data.floor and estate.data.building.floors %}
+                    {{ 'estate_floor'|trans }}: <b>{{ estate.data.floor }} <span style="font-family: monospace;">/</span> <span title="{{ 'building_floors'|trans }}">{{ estate.data.building.floors }}</span></b>
+                {% elseif estate.data.floor %}
+                    {{ 'estate_floor'|trans }}: <b>{{ estate.data.floor }}</b>
+                {% else %}
+                    {{ 'building_floors'|trans }}: <b>{{ estate.data.building.floors }}</b>
+                {% endif %}
+                <br/>
+            {% endif %}
+
+            {% if estate.data.building.construction.year %}
+                <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                {{ 'construction_year'|trans }} : {{ estate.data.building.construction.year }}
+                <br>
+            {% endif %}
+
+            {% block rooms %}
+                {% set this = estate.data.rooms %}
+                {% if this.bedroom %}
+                    <div title="{{ 'estate_rooms_bedroom'|trans }}" class="sidebar-item-rooms">
+                        <i class="fa fa-bed fa-fw rooms" aria-hidden="true">{{this.bedroom}}</i>
+                    </div>
+                {% endif %}
+
+                {% if this.bathroom %}
+                    <div title="{{ 'estate_rooms_bath'|trans }}" class="sidebar-item-rooms">
+                        <i class="fa fa-shower fa-fw rooms" aria-hidden="true">{{this.bathroom}}</i>
+                    </div>
+                {% endif %}
+
+                {% if this.parking %}
+                    <div title="{{ 'estate_rooms_parking'|trans }}" class="sidebar-item-rooms">
+                        <i class="fa fa-car fa-fw rooms" aria-hidden="true">{{this.parking}}</i>
+                    </div>
+                {% endif %}
+            {% endblock rooms %}
+        </div>
+    </a>
+{% endfor %}
+
+
+

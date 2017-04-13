@@ -1,0 +1,194 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@CatalogBundle/Resources/config/config.yml" }
+    - { resource: "@UserBundle/Resources/config/config.yml" }
+    - { resource: "@RestApiBundle/Resources/config/config.yml" }
+    - { resource: "@CabinetBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'CatalogBundle:form:address_map_fields.html.twig'
+    globals:
+        google_map_apikey : "%google_map_apikey%"
+        prodMode: "%prod_mode%"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_pgsql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        filters:
+            softdeleteable:
+                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                enabled: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    default_mailer: default
+    mailers:
+        default:
+            transport:  "%mailer_transport%"
+            host:       "%mailer_host%"
+            port:       "%mailer_port%"
+            encryption: "%mailer_encryption%"
+            auth_mode:  "%mailer_auth_mode%"
+            username:   "%mailer_default_user%"
+            password:   "%mailer_default_password%"
+            spool:      { type: memory }
+        errors:
+            transport:  "%mailer_transport%"
+            host:       "%mailer_host%"
+            port:       "%mailer_port%"
+            encryption: "%mailer_encryption%"
+            auth_mode:  "%mailer_auth_mode%"
+            username:   "%mailer_error_user%"
+            password:   "%mailer_error_password%"
+            spool:      { type: memory }
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+        jsqueeze: ~
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: UserBundle\Entity\User
+    registration:
+        confirmation:
+            enabled: true
+        form:
+            type: '%user.registration.form.type.class%'
+    from_email:
+        address:        "%mailer_default_user%"
+        sender_name:    Viet-Info.com
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            tree: true
+            timestampable: true # not needed: listeners are not enabled by default
+
+services:
+    gedmo.listener.softdeleteable:
+        class: Gedmo\SoftDeleteable\SoftDeleteableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ '@annotation_reader' ]]
+
+sonata_admin:
+    title: Управление
+    title_logo: favicon.ico
+    templates:
+        layout: CatalogBundle:admin:layout.html.twig
+        dashboard: CatalogBundle:admin:dashboard.html.twig
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+#sonata_formatter:
+#    ckeditor:
+#        templates:
+#            browser: 'SonataFormatterBundle:Ckeditor:browser.html.twig'
+#            upload: 'SonataFormatterBundle:Ckeditor:upload.html.twig'
+#    formatters:
+#        richhtml:
+#            service: sonata.formatter.text.raw
+#            extensions:
+#                - sonata.formatter.twig.control_flow
+#                - sonata.formatter.twig.gist
+#                - sonata.media.formatter.twig
+
+liip_imagine:
+    cache: gallery_media
+    resolvers:
+        gallery_media:
+            web_path:
+                web_root: "%kernel.root_dir%/../web"
+                cache_prefix: "cache"
+
+    filter_sets:
+        estate_thumb_default:
+          quality: 75
+          filters:
+            thumbnail: { size: [400, 300], mode: outbound }
+
+        estate_thumb_small:
+          quality: 75
+          filters:
+            thumbnail: { size: [200, 150], mode: outbound }
+
+        sonata_admin_thumb:
+              quality: 75
+              filters:
+                  thumbnail: { size: [120, 120], mode: outbound }
+
+oneup_uploader:
+    mappings:
+        estateMedia:
+            frontend: dropzone
+    chunks:
+        maxage: 86400
+        storage:
+            directory: "%kernel.cache_dir%/uploader/chunks"
+
+comur_image:
+    config:
+        cropped_image_dir: 'cropped'
+        thumbs_dir: 'thumbnails'
+        media_lib_thumb_size: 300
+        web_dirname: 'web'
+        translation_domain: 'ComurImageBundle'
+        gallery_thumb_size: 300
+        gallery_dir: 'gallery'

@@ -1,0 +1,15 @@
+<div id="street-view"></div>
+<script>
+    var panorama = null;
+    function initStreetView() {
+        var position = {lat: {{ lat }}, lng: {{ lng }}};
+        panorama = new google.maps.StreetViewPanorama(
+            document.getElementById('street-view'),
+            {
+                position: position,
+                pov: {heading: 165, pitch: 0},
+                zoom: 1
+            }
+        );
+    }
+</script>

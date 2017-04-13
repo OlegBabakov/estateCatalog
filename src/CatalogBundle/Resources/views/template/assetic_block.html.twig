@@ -1,0 +1,49 @@
+{#Compiling all files in one by assetic bundle#}
+
+{% if block == 'app.css' %}
+    {% stylesheets
+    'vendor/bootstrap/dist/css/bootstrap.min.css'
+    'vendor/jquery-ui/themes/dark-hive/jquery-ui.min.css'
+    'vendor/components-font-awesome/css/font-awesome.min.css'
+    'vendor/blueimp-gallery/css/blueimp-gallery.min.css'
+    'vendor/multiselect/css/multi-select.css'
+    'vendor/select2/dist/css/select2.min.css'
+    'vendor/select2-bootstrap-theme/dist/select2-bootstrap.min.css'
+    'vendor/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css'
+    '@CatalogBundle/Resources/public/css/*'
+    '@CatalogBundle/Resources/public/css/user/*'
+    '@UserBundle/Resources/public/css/*'
+    filter='cssrewrite' output='css/app.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endif %}
+
+{% if block == 'app_core.js' %}
+    {% javascripts filter="?jsqueeze" output="js/app_core.js"
+    'vendor/jquery/dist/jquery.min.js'
+    'vendor/jquery-ui/jquery-ui.min.js'
+    'vendor/bootstrap/dist/js/bootstrap.min.js'
+    'vendor/jquery-lazy/jquery.lazy.min.js'
+    'vendor/blueimp-gallery/js/blueimp-gallery.min.js'
+    'vendor/handlebars/handlebars.min.js'
+    'vendor/handlebars-helper-intl/dist/handlebars-intl.min.js'
+    'vendor/handlebars-helper-intl/dist/locale-data/ru.js'
+    'vendor/handlebars-helper-intl/dist/locale-data/vi.js'
+    'vendor/frameScrub/frameScrub.js'
+    'vendor/select2/dist/js/select2.min.js'
+    'vendor/multiselect/js/jquery.multi-select.js'
+    '@CatalogBundle/Resources/public/js/core/*'
+    '@CatalogBundle/Resources/public/js/templating/*'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endif %}
+
+{% if block == 'app_map.js' %}
+    {% javascripts filter="?jsqueeze" output="js/app_map.js"
+    '@CatalogBundle/Resources/public/js/map/*'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endif %}

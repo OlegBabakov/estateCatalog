@@ -1,0 +1,12 @@
+services:
+    catalog.form.send_message:
+        class: CatalogBundle\Form\SendMessageType
+        arguments: ['@service_container']
+        tags:
+            - { name: form.type }
+
+    catalog.form.call_me_request:
+        class: CatalogBundle\Form\CallMeRequestType
+        arguments: ['@service_container']
+        tags:
+            - { name: form.type }

@@ -1,0 +1,7 @@
+cabinet_profile:
+    path:     /
+    defaults: { _controller: CabinetBundle:Profile:index }
+
+cabinet_profile_avatar_change:
+    path:     /avatar/change
+    defaults: { _controller: CabinetBundle:Profile:avatarChange }

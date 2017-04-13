@@ -1,0 +1,95 @@
+{% if gallery is not empty %}
+
+    {% set galleryContainerId = 'gallery-container-'~random() %}
+    {% set linksContainerId = 'links-'~random() %}
+
+    <div id="{{ galleryContainerId }}" class="blueimp-gallery blueimp-gallery-carousel blueimp-gallery-controls">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+
+    <div id="{{ linksContainerId }}" class="gallery" hidden>
+        {% for image in gallery %}
+            {% if image.file.type is defined and image.file.type == 'video/youtube' %}
+                <a href="{{ image.file.url }}"
+                   title="{{ image.description }}"
+                   type = "text/html"
+                   data-youtube="{{ image.file.videoId }}"
+                   data-poster="{{ image.file.thumbUrl }}"
+                >
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% for image in gallery %}
+            {% if image.file.type is not defined or image.file.type != 'video/youtube' %}
+                <a href="{{ image.file.url }}" title="{{ image.description }}"></a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <script>
+        var gallery = {};
+
+        function initGallery(containerSelector, startIndex) {
+            var options = {
+                container: containerSelector,
+                carousel: true,
+
+                toggleControlsOnReturn: true,
+                toggleSlideshowOnSpace: false,
+                enableKeyboardNavigation: true,
+                startSlideshow: false,
+
+                // Require a click on the native YouTube player for the initial playback:
+                youTubeClickToPlay: false
+            };
+
+            gallery['{{ galleryContainerId }}'] = blueimp.Gallery(
+                document.getElementById('{{ linksContainerId }}').getElementsByTagName('a'),
+                options
+            );
+        }
+
+        $(function () {
+            initGallery('#{{ galleryContainerId }}');
+
+            $(document).find('#{{ galleryContainerId }} .slides img').on('click', function () {
+                var links = $('#{{ linksContainerId }}').find('a'),
+                    options = {
+                        index: gallery['{{ galleryContainerId }}'].getIndex(),
+                        event: event
+                    };
+                blueimp.Gallery(links, options);
+            });
+        })
+    </script>
+
+    <style>
+        .gallery a {
+            display: inline-block;
+        }
+
+        .gallery {
+            overflow-x: auto;
+        }
+
+        .blueimp-gallery > .prev,
+        .blueimp-gallery > .next,
+        .blueimp-gallery > .close,
+        .blueimp-gallery > .title,
+        .blueimp-gallery > .play-pause {
+            display: block;
+            /* Fix z-index issues (controls behind slide element) on Android: */
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+    </style>
+{% endif %}

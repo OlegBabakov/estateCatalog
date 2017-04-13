@@ -1,0 +1,15 @@
+estate_show:
+    path:     /{id}
+    defaults: { _controller: CatalogBundle:Estate:show }
+    options:
+        expose: true
+
+estate_action_send_message:
+    path:     /{id}/action/send-message
+    defaults: { _controller: CatalogBundle:Estate:sendMessage }
+
+estate_action_call_me_request:
+    path:     /{id}/action/call-me
+    defaults: { _controller: CatalogBundle:Estate:callMeRequest }
+
+

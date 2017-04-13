@@ -1,0 +1,215 @@
+{{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.contract) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.estateType) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.buildYear) }}
+        </div>
+    </div>
+
+    <div class="row form-group build-year-interval-container" hidden>
+        <div class="col-md-12">
+            <div class="row range">
+                <div class="col-xs-6">
+                    {{ form_widget(form.buildYearMin) }}
+                </div>
+                <div class="col-xs-6">
+                    {{ form_widget(form.buildYearMax) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-12">
+            <label class="control-label">{{ 'filter_form_price'|trans }}, {{ currencySymbol|raw }}</label>
+            <div class="row range">
+                <div class="col-xs-6">
+                    {{ form_widget(form.priceMin) }}
+                </div>
+                <div class="col-xs-6">
+                    {{ form_widget(form.priceMax) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            {{ form_row(form.bedrooms) }}
+        </div>
+    </div>
+
+    <div class="row facilities-row">
+        <div class="col-xs-12">
+            <button type="button" class="btn btn-default filter-btn" data-toggle="modal" data-target="#facilities-modal">
+                <i class="fa fa-plus fa-fw" aria-hidden="true"></i>{{ 'estate_facilities'|trans }}&nbsp;<span class="facilities-counter"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="row" style="padding: 10px 3px;">
+        <div class="col-xs-6 inlined-checkbox-container">
+            {#<i class="fa fa-camera" aria-hidden="true"></i>#}
+            {{ form_widget(form.withPhotos) }}
+        </div>
+        <div class="col-xs-6 inlined-checkbox-container">
+            {#<i class="fa fa-sun-o" aria-hidden="true"></i>#}
+            {{ form_widget(form.seaView) }}
+        </div>
+    </div>
+
+    {#Area#}
+    <div class="row" data-toggle="collapse" data-target="#area_fields_container" style="cursor: pointer; margin-bottom: 10px;">
+        <div class="col-md-12">
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
+            <span class="section-title">{{ 'estate_area'|trans }}</span>
+        </div>
+    </div>
+
+    <div id="area_fields_container"  class="collapse"d>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label class="control-label">{{ 'estate_area_total'|trans }}, m<sup>2</sup></label>
+                <div class="row range">
+                    <div class="col-xs-6">
+                        {{ form_widget(form.areaTotalMin) }}
+                    </div>
+                    <div class="col-xs-6">
+                        {{ form_widget(form.areaTotalMax) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label class="control-label">{{ 'estate_area_living'|trans }}, m<sup>2</sup></label>
+                <div class="row range">
+                    <div class="col-xs-6">
+                        {{ form_widget(form.areaLivingMin) }}
+                    </div>
+                    <div class="col-xs-6">
+                        {{ form_widget(form.areaLivingMax) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label class="control-label">{{ 'estate_area_kitchen'|trans }}, m<sup>2</sup></label>
+                <div class="row range">
+                    <div class="col-xs-6">
+                        {{ form_widget(form.areaKitchenMin) }}
+                    </div>
+                    <div class="col-xs-6">
+                        {{ form_widget(form.areaKitchenMax) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#Building section#}
+    <div class="row" data-toggle="collapse" data-target="#building_fields_container" style="cursor: pointer; margin-bottom: 10px;">
+        <div class="col-md-12">
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
+            <span class="section-title">{{ 'estate_floor'|trans }}</span>
+        </div>
+    </div>
+
+    <div id="building_fields_container"  class="collapse" style="margin-bottom: 115px;">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label class="control-label">{{ 'estate_floor'|trans }}</label>
+                <div class="row range">
+                    <div class="col-xs-6">
+                        {{ form_widget(form.floorMin) }}
+                    </div>
+                    <div class="col-xs-6">
+                        {{ form_widget(form.floorMax) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="facilities-modal" tabindex="-1" role="dialog" aria-labelledby="facilities-modal-label">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="facilities-modal-label">{{ 'estate_facilities'|trans }}&nbsp;<span class="facilities-counter"></span></h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_widget(form.facilities) }}
+                </div>
+                <div class="modal-footer">
+                    <div class="message" style="display: inline-block; margin-right: 20px;"></div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{ form_end(form) }}
+
+<style>
+    .inlined-checkbox-container .checkbox{
+        display: inline-block;
+    }
+
+    .section-title {
+        position: relative;
+        font-weight: bold;
+    }
+
+    .section-title:before {
+        position: absolute;
+        width: 1000px;
+        left: 110%;
+        top: 7px;
+        content: '';
+        background: #b7b7b7;
+        height: 2px;
+    }
+
+    .range div:nth-child(1) {
+        padding-right: 1px;
+    }
+
+    .range div:nth-child(2) {
+        padding-left: 1px;
+    }
+</style>
+
+<script>
+    $(function () {
+
+        $('.facilities-multiselect').multiSelect({
+            afterSelect: updateFacilitiesCount,
+            afterDeselect: updateFacilitiesCount
+        });
+
+        function updateFacilitiesCount() {
+            $('.facilities-counter').html(
+                    '('+$('.facilities-multiselect').val().length+')'
+            );
+        }
+
+        updateFacilitiesCount();
+    });
+</script>

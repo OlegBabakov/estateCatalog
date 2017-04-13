@@ -1,0 +1,16 @@
+{% block subject %}
+    Запрос по недвижимости
+{% endblock subject %}
+
+{% block body %}
+    {% embed '@Catalog/email/template/email_template_basic.html.twig' %}
+        {% block body %}
+            Посетитель сайта оставил запрос по <a href="http://{{ domain }}{{ path('estate_show', {id : estate.id}) }}" target="_blank">объекту недвижимости #{{ estate.id }}</a>
+            <hr/>
+            <b>{{ client.name }}, {{ client.email }}</b>
+            <blockquote>
+                {{ client.text|nl2br }}
+            </blockquote>
+        {% endblock body %}
+    {% endembed %}
+{% endblock body %}

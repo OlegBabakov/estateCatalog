@@ -1,0 +1,22 @@
+parameters:
+    cabinet.oneup_uploader_listener.class: CabinetBundle\Service\upload\OneupUploaderListener
+    cabinet.estate_media_manager.class: CabinetBundle\Service\manager\EstateMediaManager
+    entity_lifecycle_listener.class: CabinetBundle\Service\listener\EntityLifecycleListener
+
+services:
+
+    cabinet.oneup_uploader_listener:
+        class: '%cabinet.oneup_uploader_listener.class%'
+        arguments: ['@service_container']
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+
+    cabinet.estate_media_manager:
+        class: '%cabinet.estate_media_manager.class%'
+        arguments: ['@service_container']
+
+    estate_media_listener:
+        class: '%entity_lifecycle_listener.class%'
+        arguments: ['@cabinet.estate_media_manager']
+        tags:
+            - { name: doctrine.event_listener, event: preRemove, priority: 15 }

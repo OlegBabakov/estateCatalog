@@ -1,0 +1,44 @@
+imports:
+    - { resource: config.yml }
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+services:
+    monolog_processor:
+        class: CatalogBundle\Classes\System\MonologProcessor
+        calls:
+            - [setContainer, ['@service_container']]
+        tags:
+            - { name: monolog.processor }
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      streamed
+        grouped:
+            type:    group
+            members: [streamed, buffered]
+        streamed:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: error
+        buffered:
+            type:    buffer
+            handler: swift
+            level:  critical
+        swift:
+            type:   swift_mailer
+            mailer: swiftmailer.mailer.errors
+            from_email: "%mailer_error_user%"
+            to_email:   "%admin_email%"
+            subject:    "VIETNAM Ошибка: %%message%%"
+            level:  critical
+#            formatter: html_formatter
+            formatter:  monolog.formatter.html
+            content_type: text/html

@@ -1,0 +1,24 @@
+{% block subject %}
+    Запрос по недвижимости : просьба перезвонить
+{% endblock subject %}
+
+{% block body %}
+    {% embed '@Catalog/email/template/email_template_basic.html.twig' %}
+        {% block body %}
+            Посетитель сайта оставил запрос на зновок по <a href="http://{{ domain }}{{ path('estate_show', {id : estate.id}) }}" target="_blank">объекту недвижимости #{{ estate.id }}</a>
+            <hr/>
+            <b>
+                {{ data.name }}<br/>
+                {{ data.email }}<br/>
+                {{ data.phone }}
+                {% if data.timeFrom or data.timeTo %}
+                    (
+                        {{ 'call_time'|trans }} :
+                        {{ data.timeFrom|default('not_set')|trans }} - {{ data.timeTo|default('not_set')|trans }};&nbsp;
+                        {{ 'timezone'|trans }} : {{ data.timezone|default('not_set')|trans }}
+                    )
+                {% endif %}
+            </b>
+        {% endblock body %}
+    {% endembed %}
+{% endblock body %}

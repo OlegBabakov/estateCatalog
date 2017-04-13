@@ -1,0 +1,19 @@
+services:
+
+    catalog.admin.estate:
+        class: CatalogBundle\Admin\EstateAdmin
+        arguments: [~, CatalogBundle\Entity\Estate, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: estate, label: Estate }
+
+    catalog.admin.estate_media:
+        class: CatalogBundle\Admin\EstateMediaAdmin
+        arguments: [~, CatalogBundle\Entity\EstateMedia, CatalogBundle:EstateMediaAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: estate, label: EstateMedia }
+
+    catalog.admin.system_parameter:
+        class: CatalogBundle\Admin\SystemParameterAdmin
+        arguments: [~, CatalogBundle\Entity\SystemParameter, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: SystemParameter }

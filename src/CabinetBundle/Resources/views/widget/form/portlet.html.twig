@@ -1,0 +1,13 @@
+{% set style = style|default('') %}
+{% set color = color|default('blue') %}
+<div class="portlet box {{ color }} col-xs-6 col-md-4" style="display: inline-block; {{ style }}">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-home"></i>{{ form_label(form) }}
+        </div>
+    </div>
+    <div class="portlet-body">
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+</div>

@@ -1,0 +1,8 @@
+{#Кастомизации панели навигации в зависимости от showcase#}
+{% if showcase() %}
+    {% if showcase().name == 'zimavteple' %}
+        {% include '@Catalog/template/navbar/showcase/navbar_showcase_zimavteple.html.twig' %}
+    {% endif %}
+{% else %}
+    {% include '@Catalog/template/navbar/navbar_base.html.twig' %}
+{% endif %}

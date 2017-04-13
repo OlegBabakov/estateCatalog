@@ -1,0 +1,396 @@
+{% extends '@Cabinet/template/base.html.twig' %}
+
+{% block head_title %}Estate Add{% endblock %}
+{% block breadcrumb %}{% endblock breadcrumb %}
+
+{% block content %}
+
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-home"></i>
+                {% if estate is defined and estate.id %}
+                    {{ estate }} :
+                {% endif %}
+                {{ form_label(form.data) }}
+            </div>
+        </div>
+        <div class="portlet-body form">
+
+
+            {#<div class="form-actions top">#}
+
+            {#</div>#}
+
+            <div class="form-body">
+                <div class="tabbable-line">
+                    <ul class="nav nav-tabs ">
+                        <li class="active">
+                            <a href="#tab_1" data-toggle="tab">
+                                <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                                {{ 'general'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_6" data-toggle="tab">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                {{ 'estate_description'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_2" data-toggle="tab" data-tab-target="address-map">
+                                <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>
+                                {{ 'location'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_4" data-toggle="tab" data-tab-target="gallery">
+                                <i class="fa fa-camera fa-fw" aria-hidden="true"></i>
+                                {{ 'gallery'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_3" data-toggle="tab">
+                                <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
+                                {{ 'estate_data'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_5" data-toggle="tab">
+                                <i class="fa fa-building-o fa-fw" aria-hidden="true"></i>
+                                {{ 'building_info'|trans }}
+                            </a>
+                        </li>
+                    </ul>
+
+                    {{ form_start(form) }}
+                        <div class="tab-content">
+                            <br>
+                            {{ form_row(form.submit) }}
+                            {{ form_errors(form) }}
+                            <div class="tab-pane active" id="tab_1">
+                                {{ form_row(form.estateType) }}
+                                {{ form_row(form.parent) }}
+                                {{ form_row(form.title) }}
+                                {{ form_row(form.priceSell) }}
+                                {{ form_row(form.priceRent) }}
+                            </div>
+                            <div class="tab-pane" id="tab_2">
+                                {{ form_row(form.address) }}
+                            </div>
+                            <div class="tab-pane nested-fields" id="tab_3">
+                                {{ form_row(form.data.floor) }}
+                                {{ form_row(form.data.rooms) }}
+                                {{ form_row(form.data.area) }}
+                                {{ form_row(form.data.facilities) }}
+                            </div>
+                            <div class="tab-pane nested-fields" id="tab_5">
+                                {{ form_row(form.data.building.construction) }}
+                                {{ form_row(form.data.building) }}
+                            </div>
+                            <div class="tab-pane" id="tab_6">
+                                {{ form_row(form.description) }}
+                                <div id="editor1">
+                                </div>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab_4">
+                            {% if estate is defined and estate.id %}
+                                <button class="btn red" id="add_video">
+                                    <i class="fa fa-youtube-play fa-lg" style="margin-right: 10px;" aria-hidden="true"></i>
+                                    Add YouTube video
+                                </button>
+
+                                <form action="{{ oneup_uploader_endpoint('estateMedia') }}" class="dropzone dropzone-file-area dz-clickable" id="my-dropzone">
+                                    <input type="hidden" name="estate" value="{{ estate.id }}">
+                                    <div class="dz-default dz-message"></div>
+                                </form>
+
+                                {% if galleryFormList is defined %}
+                                    <div id="estate-gallery-form-container">
+                                        {% include '@Cabinet/widget/form/estate_media_gallery_form.html.twig' with {forms : galleryFormList} only %}
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="alert alert-info">
+                                    <strong>{{ 'save_to_attach_gallery'|trans }}</strong>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+
+    </div>
+
+    <style>
+        .dropzone-file-area {
+            width: 100%;
+            min-height: 180px;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .dropzone .dz-message:after {
+            content: "\f0ee";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            font-family: FontAwesome;
+            font-size: 88px;
+            top: 55px;
+            left: 50%;
+            margin: 0 0 0 -40px;
+            line-height: 80px;
+            opacity: .5;
+            filter: alpha(opacity = 50);
+            -webkit-transition: all 200ms ease;
+            -moz-transition: all 200ms ease;
+            -ms-transition: all 200ms ease;
+            -o-transition: all 200ms ease;
+            transition: all 200ms ease;
+        }
+
+        .fa-cloud-upload {
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 9%;
+            font-size: 60pt;
+            color: #bbbbbb;
+        }
+
+        .nested-fields .form-group .form-group {
+            display: inline-block;
+            width: 25%;
+            margin-right: 15px;
+        }
+
+        .form-group > div {
+            padding: 5px 10px;
+            background: #f2f2f2;
+            border: solid 1px #d7d7d7;
+        }
+
+        .media-form-container {
+            background: #eeeeee;
+            width: 30%;
+            max-width: 250px;
+            min-width: 200px;
+            display: inline-block;
+            border: 1px solid #d3d3d3;
+            padding: 5px 5px;
+            margin-top: 15px;
+            margin-right: 5px;
+        }
+
+        .media-form-container > div {
+            max-width: 25%;
+            min-width: 25%;
+            padding: 0 15px;
+            display: inline-block;
+        }
+
+        .media-form-container img {
+            /*min-width: 30%;*/
+            width: 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .media-form-container .top-controls {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .media-form-container .top-controls div {
+            display: inline-block;
+        }
+
+        .media-form-container .bottom-controls div {
+            display: inline-block;
+        }
+
+        .bottom-controls > input {
+            width: 79%;
+            display: inline-block;
+        }
+
+        .bottom-controls > button {
+            float: right;
+        }
+
+        .image-container {
+            min-height: 180px;
+        }
+
+        .video-icon {
+            position: absolute;
+            color: #e7505a;
+            top: 14px;
+            left: 6px;
+            font-size: xx-large;
+        }
+
+        /*.image-container:before {    !* create a full-height inline block pseudo=element *!*/
+            /*content: ' ';*/
+            /*display: inline-block;*/
+            /*vertical-align: middle;  !* vertical alignment of the inline element *!*/
+            /*height: 100%;*/
+        /*}*/
+    </style>
+
+
+        <script>
+
+            $(function () {
+
+                var estateGalleryFormContainer = $('#estate-gallery-form-container');
+
+                //Инициализация карты при переключении таба
+                $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) { //переключение табов
+                    var target = $(this).data('tab-target');
+                    if (target == 'gallery') {
+                        $('.tab-pane').removeClass('active');
+                        $('#tab_4').addClass('active')
+                    } else {
+                        $('#tab_4').removeClass('active')
+                    }
+                });
+
+                //Редактор описания
+                $(".wysiwyg").summernote({
+                    height: "40em"
+                });
+
+                {% if estate is defined and estate.id %}
+
+                    //Сортировка галлереи
+                    estateGalleryFormContainer.sortable({
+                        stop: function( event, ui ) {
+                            var positions = [];
+                            $(this).find('.media-form-container').each(function() {
+                                positions.push($(this).data('media-id'))
+                            });
+                            console.log(positions);
+
+                            $.ajax({
+                                type : 'POST',
+                                url  : '{{ path('cabinet_estate_media_positions', {id : estate.id}) }}',
+                                data : {
+                                    'positions' : positions
+                                }
+                            });
+                        }
+                    });
+                    estateGalleryFormContainer.disableSelection();
+
+                    function updateGallery() {
+                        $.ajax({
+                            type        : 'POST',
+                            url         : '{{ path('cabinet_estate_gallery_update', {id : estate.id}) }}',
+                            dataType    : 'json',
+                            success     :
+                                    function(data) {
+                                        estateGalleryFormContainer.html(data.form_view);
+                                    }
+                        });
+                    }
+
+                    $('#add_video').click(function(){
+                        bootbox.prompt("Add video URL from YouTube", function(result) {
+                            if (result) {
+                                $.ajax({
+                                    type        : 'POST',
+                                    url         : '{{ path('cabinet_estate_video_add', {id : estate.id}) }}',
+                                    dataType    : 'json',
+                                    data        : {
+                                        'video' : result
+                                    },
+                                    success     :
+                                            function(data) {
+                                                estateGalleryFormContainer.html(data.form_view);
+                                            }
+                                });
+                            }
+                        });
+                    });
+
+                    var FormDropzone = function () {
+                        return {
+                            //main function to initiate the module
+                            init: function () {
+                                Dropzone.options.myDropzone = {
+                                    dictDefaultMessage: "",
+                                    init: function() {
+                                        this.on("addedfile", function(file) {
+                                        });
+
+                                        this.on("complete", function() {
+                                            if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) { //wait when all files are complete
+                                                updateGallery();
+                                            }
+                                        });
+
+                                    }
+                                }
+                            }
+                        };
+                    }();
+
+                    Dropzone.options.photoDropzone = {
+                        init: function() {
+                            this.on("complete", function() {
+                                if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) { //wait when all files are complete
+                                    GalleryEventHandler.onUploadComplete();
+                                }
+                            });
+
+                            this.on("addedfile", function(file) {
+                                if (AlbumManager.data.albumList == undefined || AlbumManager.data.albumList.length == 0) {
+                                    this.removeFile(file);
+                                    popup('info', 'Please select album to upload files<br>Or create your first album');
+                                }
+                            });
+                        }
+                    };
+
+                    jQuery(document).ready(function() {
+                        FormDropzone.init();
+                    });
+
+                    estateGalleryFormContainer.on('click','[type="submit"]', null, function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var form = $(this).closest('form');
+                        var formData = form.serializeArray();
+                        formData.push({ name: this.name, value: this.value });
+
+                        $.ajax({
+                            type        : 'POST',
+                            url         : form.attr('action'),
+                            data        : formData,
+                            dataType    : 'json',
+                            success     :
+                                    function(data) {
+                                        estateGalleryFormContainer.html(data.form_view);
+                                    }
+                        });
+
+                    });
+                {% endif %}
+
+            })
+        </script>
+
+
+{% endblock content %}

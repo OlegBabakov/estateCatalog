@@ -1,0 +1,17 @@
+<td>
+    {% if object.getFile %}
+        {% set file = object.getFile %}
+
+        {% if 'image' in file.mimeType and file.url %}
+            <img src="{{ file.url|imagine_filter('sonata_admin_thumb') }}" />
+        {% endif %}
+
+        {#{% if 'video' in file.mimeType %}#}
+            {#{% if object.videoThumbImage %}#}
+                {#<img src="{{ object.videoThumbImage(true)|imagine_filter('sonata_admin_thumb') }}" />#}
+            {#{% else %}#}
+                {#<img src="{{ asset('bundles/main/images/icon/default-video-thumbnail.jpg')|imagine_filter('sonata_admin_thumb') }}" />#}
+            {#{% endif %}#}
+        {#{% endif %}#}
+    {% endif %}
+</td>

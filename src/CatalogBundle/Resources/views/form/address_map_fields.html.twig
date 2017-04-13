@@ -1,0 +1,64 @@
+{% block address_map_widget %}
+    <div class="address-map" {{ block('widget_container_attributes') }}>
+        {% block address_map_html %}
+            <input type="text" id="{{ id }}_input" class="address-map__search-input">
+            <button id="{{ id }}_search_button" class="address-map__search-button">
+                {{ 'Search'|trans }}
+            </button>
+            {% if include_current_position_action %}
+                <a href="#" id="{{ id }}_current_position" class="address-map__current-position">
+                    {{ 'Current location'|trans }}
+                </a>
+            {% endif %}
+            <div id="{{ id }}_map_canvas" class="address-map__map-canvas" style="width: {{ map_width }}; height: {{ map_height }};"></div>
+            <div id="{{ id }}_error" class="address-map__error-message"></div>
+        {% endblock %}
+
+        {% block address_map_fields %}
+            {% for child in form %}
+                {{ form_row(child) }}
+            {% endfor %}
+        {% endblock %}
+
+        {% block address_map_scripts %}
+            <script src="{{ asset('bundles/catalog/js/address_map.js') }}"></script>
+        {% endblock %}
+
+        {% block address_map_callback %}
+            <script>
+                var gmap_callback = function(location, gmap){
+                    // your callback code here
+                }
+            </script>
+        {% endblock %}
+
+        <script>
+            var addressMap = new AddressMap({
+                mapCanvasId: '{{ id }}_map_canvas',
+                secure: '{{ secure }}',
+                googleApiKey: '{{ google_api_key }}',
+                googleMapsLoadedCallback: 'googleMapsLoadedCallback',
+                searchInputId: '{{ id }}_input',
+                searchButtonId: '{{ id }}_search_button',
+                searchErrorId: '{{ id }}_error',
+                currentPositionId: '{{ id }}_current_position',
+                defaultLat: '{% if value is not null and value.latitude %}{{ value.latitude }}{% else %}{{ default_lat }}{% endif %}',
+                defaultLng: '{% if value is not null and value.longitude %}{{ value.longitude }}{% else %}{{ default_lng }}{% endif %}',
+                defaultZoom: {% if value is not null and value.latitude and value.longitude %}15{% else %}5{% endif %},
+                latFieldId: '{{ attribute(form, lat_field).vars.id }}',
+                lngFieldId: '{{ attribute(form, lng_field).vars.id }}',
+                countryFieldId: '{{ attribute(form, country_field).vars.id }}',
+                zipCodeFieldId: '{{ attribute(form, zipcode_field).vars.id }}',
+                streetNameFieldId: '{{ attribute(form, streetname_field).vars.id }}',
+                streetNumberFieldId: '{{ attribute(form, streetnumber_field).vars.id }}',
+                cityFieldId: '{{ attribute(form, city_field).vars.id }}',
+                callback: gmap_callback
+            });
+            addressMap.init();
+
+            function googleMapsLoadedCallback() {
+                addressMap.handleGoogleMapApiReady();
+            }
+        </script>
+    </div>
+{% endblock %}

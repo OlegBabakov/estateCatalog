@@ -1,0 +1,49 @@
+root:
+    path: /
+    defaults:
+        _controller: CatalogBundle:Localization:rootRedirect
+#        path: /_locale/
+#        permanent: true
+
+routing_locale:
+    resource: "routing_locale.yml"
+    prefix:   /{_locale}/
+    requirements:
+        _locale: '%languages%'
+        
+change_currency:
+    path: /currency/{currency}
+    defaults:
+        _controller: CatalogBundle:Localization:changeCurrency
+
+change_language:
+    path: /language/{language}
+    defaults:
+        _controller: CatalogBundle:Localization:changeLanguage
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+comur_image:
+    resource: "@ComurImageBundle/Resources/config/routing.yml"
+    prefix:   /
+
+oneup_uploader:
+    resource: .
+    type: uploader
+
+rest_api:
+    type: rest
+    resource: "@RestApiBundle/Resources/config/routing.yml"
+    prefix:   /api/v1
+
+testing_error_generator:
+    path: /system_tester/error_generator/{errorType}
+    defaults:
+      _controller: CatalogBundle:Tester:errorGenerator

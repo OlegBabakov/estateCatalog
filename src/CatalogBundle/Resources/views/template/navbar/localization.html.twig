@@ -1,0 +1,71 @@
+{% set currency = app.session.get('currency') %}
+{% if not currency %}
+    {% set currency = 'USD' %}
+{% endif %}
+
+<li>
+    <a class="dropdown-toggle" type="button" data-toggle="dropdown">
+        <i class="fa fa-money fa-lg"></i>  {{ currency }}
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="{{ path('change_currency', {'currency' : 'USD'}) }}">( <b>&#36;</b> )  USD</a>
+        </li>
+        <li>
+            <a href="{{ path('change_currency', {'currency' : 'EUR'}) }}">( <b>&#8364;</b> )  EUR</a>
+        </li>
+        <li>
+            <a href="{{ path('change_currency', {'currency' : 'RUB'}) }}">( <b>&#8381;</b> )  RUB</a>
+        </li>
+        <li>
+            <a href="{{ path('change_currency', {'currency' : 'VND'}) }}">( <b>&#8363;</b> )  VND</a>
+        </li>
+    </ul>
+</li>
+
+<li class="hidden-md hidden-lg">
+    <a class="dropdown-toggle" type="button" data-toggle="dropdown">
+        <i class="fa fa-language fa-lg" aria-hidden="true"></i> EN-RU-VN
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="{{ path('change_language', {'language' : 'en'}) }}">
+                <img src="{{ asset('img/icon/flags24/gb.png') }}" class="lng-change-icon"/>
+                English
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('change_language', {'language' : 'ru'}) }}">
+                <img src="{{ asset('img/icon/flags24/ru.png') }}" class="lng-change-icon"/>
+                Русский
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('change_language', {'language' : 'vn'}) }}">
+                <img src="{{ asset('img/icon/flags24/vn.png') }}" class="lng-change-icon"/>
+                Tiếng Việt
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li class="hidden-sm">
+    <a href="{{ path('change_language', {'language' : 'en'}) }}">
+        <img src="{{ asset('img/icon/flags24/gb.png') }}" class="lng-change-icon"/>
+        English
+    </a>
+</li>
+
+<li class="hidden-sm">
+    <a href="{{ path('change_language', {'language' : 'ru'}) }}">
+        <img src="{{ asset('img/icon/flags24/ru.png') }}" class="lng-change-icon"/>
+        Русский
+    </a>
+</li>
+
+<li class="hidden-sm">
+    <a href="{{ path('change_language', {'language' : 'vn'}) }}">
+        <img src="{{ asset('img/icon/flags24/vn.png') }}" class="lng-change-icon"/>
+        Tiếng Việt
+    </a>
+</li>

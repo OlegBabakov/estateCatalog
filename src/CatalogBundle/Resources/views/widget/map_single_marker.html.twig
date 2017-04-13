@@ -1,0 +1,19 @@
+<div id="map"></div>
+<script>
+    var map = null;
+    function initMap() {
+        var center = {lat: {{ lat }}, lng: {{ lng }}};
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: center
+        });
+
+        var tmpLatLng = new google.maps.LatLng({{ lat }}, {{ lng }});
+        new google.maps.Marker({
+            map: map,
+            position: tmpLatLng,
+            //icon: EstateManager.mapSettings.markerIcon,
+            title : {{ title|default('null') }}
+        });
+    }
+</script>

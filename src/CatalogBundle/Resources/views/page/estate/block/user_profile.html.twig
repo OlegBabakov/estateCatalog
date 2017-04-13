@@ -1,0 +1,54 @@
+{% if user is defined %}
+
+    <div id="contacts" class="profile">
+        <div style="margin: 10px 0">
+            {% if user.avatar.thumbUrl is defined %}
+                <img src="{{ user.avatar.thumbUrl }}" class="contact_avatar">
+            {% endif %}
+            <div class="username">
+                {{ user.firstName }} {{ user.secondName }}
+            </div>
+        </div>
+
+        <div class="contact-info">
+            {% if user.profile.phone is defined and user.profile.phone %}
+                <div class="margin-top-20 profile-desc-link">
+                    <i class="fa fa-phone fa-fw"></i><b>{{ user.profile.phone }}</b>
+                </div>
+            {% endif %}
+
+            {% if false and user.profile.site is defined and user.profile.site %}
+                <div class="margin-top-20 profile-desc-link">
+                    <i class="fa fa-globe fa-fw"></i><a href="http://{{ user.profile.site }}" target="_blank">{{ user.profile.site }}</a>
+                </div>
+            {% endif %}
+
+            {% if user.profile.messengers.whatsapp is defined and user.profile.messengers.whatsapp %}
+                <div class="margin-top-20 profile-desc-link">
+                    <i class="fa fa-whatsapp fa-fw"></i><b>WhatsApp:</b>  {{ user.profile.messengers.whatsapp }}
+                </div>
+            {% endif %}
+
+            {% if user.profile.messengers.viber is defined and user.profile.messengers.viber %}
+                <div class="margin-top-20 profile-desc-link">
+                    <i class="fa fa-whatsapp fa-fw"></i><b>Viber:</b> {{ user.profile.messengers.viber }}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if showActions|default(false) %}
+            <div class="row actions">
+                <div class="btn btn-primary btn-full-width" data-target="#call-me-modal" data-user-id="{{ user.id }}">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    {{ 'call_me'|trans }}
+                </div>
+
+                <div class="btn btn-primary btn-full-width" data-target="#send-message-modal" data-user-id="{{ user.id }}">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    {{ 'send_message'|trans }}
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+{% endif %}

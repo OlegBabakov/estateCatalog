@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="general">
+                <source>general</source>
+                <target>General</target>
+            </trans-unit>
+            <trans-unit id="title">
+                <source>title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="description">
+                <source>description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="gallery">
+                <source>gallery</source>
+                <target>Gallery</target>
+            </trans-unit>
+            <trans-unit id="location">
+                <source>location</source>
+                <target>Location</target>
+            </trans-unit>
+            <trans-unit id="save">
+                <source>save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="construction_year">
+                <source>construction_year</source>
+                <target>Year of construction</target>
+            </trans-unit>
+            <trans-unit id="construction_quarter">
+                <source>construction_quarter</source>
+                <target>Quarter</target>
+            </trans-unit>
+            <trans-unit id="completion_percent">
+                <source>completion_percent</source>
+                <target>Percent of completion</target>
+            </trans-unit>
+            <trans-unit id="found">
+                <source>found</source>
+                <target>Tìm</target>
+            </trans-unit>
+            <trans-unit id="not_set">
+                <source>not_set</source>
+                <target>Not set</target>
+            </trans-unit>
+            <trans-unit id="share">
+                <source>share</source>
+                <target>Share</target>
+            </trans-unit>
+            <trans-unit id="contacts">
+                <source>contacts</source>
+                <target>Contacts</target>
+            </trans-unit>
+            <trans-unit id="offers">
+                <source>offers</source>
+                <target>Offers</target>
+            </trans-unit>
+            <trans-unit id="search">
+                <source>search</source>
+                <target>Search</target>
+            </trans-unit>
+
+            <trans-unit id="user_account">
+                <source>user_account</source>
+                <target>User account</target>
+            </trans-unit>
+
+            <trans-unit id="message_estate_added">
+                <source>message_estate_added</source>
+                <target>Estate was successfully added</target>
+            </trans-unit>
+            <trans-unit id="message_estate_saved">
+                <source>message_estate_saved</source>
+                <target>Estate was successfully saved</target>
+            </trans-unit>
+            <trans-unit id="message_save_error">
+                <source>message_save_error</source>
+                <target>Save error</target>
+            </trans-unit>
+            <trans-unit id="save_to_attach_gallery">
+                <source>save_to_attach_gallery</source>
+                <target>Please save this estate object first to attach gallery images</target>
+            </trans-unit>
+            <trans-unit id="message_saved">
+                <source>message_saved</source>
+                <target>Successfully saved</target>
+            </trans-unit>
+
+
+            <trans-unit id="price">
+                <source>price</source>
+                <target>Giá bán</target>
+            </trans-unit>
+            <trans-unit id="price_sell">
+                <source>price_sell</source>
+                <target>Giá bán</target>
+            </trans-unit>
+            <trans-unit id="price_rent">
+                <source>price_rent</source>
+                <target>Giá thuê</target>
+            </trans-unit>
+            <trans-unit id="range_from">
+                <source>range_from</source>
+                <target>từ</target>
+            </trans-unit>
+            <trans-unit id="range_to">
+                <source>range_to</source>
+                <target>đến</target>
+            </trans-unit>
+            <trans-unit id="with_photos_only">
+                <source>with_photos_only</source>
+                <target>Có hình ảnh</target>
+            </trans-unit>
+
+            <trans-unit id="map">
+                <source>map</source>
+                <target>Bản đồ</target>
+            </trans-unit>
+            <trans-unit id="navbar_catalog">
+                <source>navbar_catalog</source>
+                <target>Mục lục</target>
+            </trans-unit>
+
+            <trans-unit id="sidebar_show_filter">
+                <source>sidebar_show_filter</source>
+                <target>Thông số tìm kiếm</target>
+            </trans-unit>
+            <trans-unit id="sidebar_hide_filter">
+                <source>sidebar_hide_filter</source>
+                <target>Trốn</target>
+            </trans-unit>
+
+            <trans-unit id="filter_form_search">
+                <source>filter_form_search</source>
+                <target>Tìm kiếm</target>
+            </trans-unit>
+            <trans-unit id="clear">
+                <source>clear</source>
+                <target>Clear</target>
+            </trans-unit>
+            <trans-unit id="filter_form_property_type">
+                <source>filter_form_property_type</source>
+                <target>Loại bất động sản</target>
+            </trans-unit>
+            <trans-unit id="filter_form_contract">
+                <source>filter_form_contract</source>
+                <target>Mua / Thuê</target>
+            </trans-unit>
+            <trans-unit id="filter_form_price">
+                <source>filter_form_price</source>
+                <target>Giá bán</target>
+            </trans-unit>
+            <trans-unit id="filter_form_bedrooms">
+                <source>filter_form_bedrooms</source>
+                <target>Số lượng phòng ngủ</target>
+            </trans-unit>
+            <trans-unit id="not_older">
+                <source>not_older</source>
+                <target>Not older</target>
+            </trans-unit>
+            <trans-unit id="not_later">
+                <source>not_later</source>
+                <target>Not later</target>
+            </trans-unit>
+            <trans-unit id="will_be_completed_this_year">
+                <source>will_be_completed_this_year</source>
+                <target>Will be completed this year</target>
+            </trans-unit>
+            <trans-unit id="build_or_deadline_year">
+                <source>build_or_deadline_year</source>
+                <target>Build or deadline year</target>
+            </trans-unit>
+            <trans-unit id="set_interval">
+                <source>set_interval</source>
+                <target>Set interval</target>
+            </trans-unit>
+
+
+            <trans-unit id="filter_form_choice_buy">
+                <source>filter_form_choice_buy</source>
+                <target>Buy</target>
+            </trans-unit>
+            <trans-unit id="filter_form_choice_rent">
+                <source>filter_form_choice_rent</source>
+                <target>Rent</target>
+            </trans-unit>
+
+            <trans-unit id="estate_type_building">
+                <source>estate_type_building</source>
+                <target>Building</target>
+            </trans-unit>
+            <trans-unit id="estate_type_apartment">
+                <source>estate_type_apartment</source>
+                <target>Apartments</target>
+            </trans-unit>
+            <trans-unit id="estate_type_hotel">
+                <source>estate_type_hotel</source>
+                <target>Hotel</target>
+            </trans-unit>
+            <trans-unit id="estate_type_house">
+                <source>estate_type_house</source>
+                <target>House</target>
+            </trans-unit>
+            <trans-unit id="estate_type_land">
+                <source>estate_type_land</source>
+                <target>Land</target>
+            </trans-unit>
+            <trans-unit id="estate_type_office">
+                <source>estate_type_office</source>
+                <target>Office</target>
+            </trans-unit>
+            <trans-unit id="estate_type_restaurant">
+                <source>estate_type_restaurant</source>
+                <target>Restaurant</target>
+            </trans-unit>
+
+
+            <trans-unit id="estate_property_type">
+                <source>estate_property_type</source>
+                <target>Loại bất động sản</target>
+            </trans-unit>
+            <trans-unit id="estate_description">
+                <source>estate_description</source>
+                <target>Chi tiết về ngôi nhà này</target>
+            </trans-unit>
+            <trans-unit id="estate_data">
+                <source>estate_data</source>
+                <target>Thông tin</target>
+            </trans-unit>
+            <trans-unit id="estate_rooms">
+                <source>estate_rooms</source>
+                <target>Số phòng</target>
+            </trans-unit>
+            <trans-unit id="estate_rooms_bedroom">
+                <source>estate_rooms_bedroom</source>
+                <target>Phòng ngủ</target>
+            </trans-unit>
+            <trans-unit id="estate_rooms_bath">
+                <source>estate_rooms_bath</source>
+                <target>Phòng tắm</target>
+            </trans-unit>
+            <trans-unit id="estate_rooms_parking">
+                <source>estate_rooms_parking</source>
+                <target>Chỗ đậu xe</target>
+            </trans-unit>
+            <trans-unit id="estate_area">
+                <source>estate_area</source>
+                <target>Diện tích</target>
+            </trans-unit>
+            <trans-unit id="estate_area_total">
+                <source>estate_area_total</source>
+                <target>Tổng số</target>
+            </trans-unit>
+            <trans-unit id="estate_area_living">
+                <source>estate_area_living</source>
+                <target>Khu vực sống</target>
+            </trans-unit>
+            <trans-unit id="estate_area_kitchen">
+                <source>estate_area_kitchen</source>
+                <target>Nhà bếp</target>
+            </trans-unit>
+            <trans-unit id="estate_floor">
+                <source>estate_floor</source>
+                <target>Tầng</target>
+            </trans-unit>
+
+
+            <trans-unit id="estate_facilities">
+                <source>estate_facilities</source>
+                <target>Tiện nghi trong căn hộ</target>
+            </trans-unit>
+            <trans-unit id="facilities_security24">
+                <source>facilities_security24</source>
+                <target>24H Security</target>
+            </trans-unit>
+            <trans-unit id="facilities_aircond">
+                <source>facilities_aircond</source>
+                <target>Air Cond</target>
+            </trans-unit>
+            <trans-unit id="facilities_fridge">
+                <source>facilities_fridge</source>
+                <target>Fridge</target>
+            </trans-unit>
+            <trans-unit id="facilities_fan">
+                <source>facilities_fan</source>
+                <target>Fan</target>
+            </trans-unit>
+            <trans-unit id="facilities_bed">
+                <source>facilities_bed</source>
+                <target>Bed</target>
+            </trans-unit>
+            <trans-unit id="facilities_balcony">
+                <source>facilities_balcony</source>
+                <target>Balcony</target>
+            </trans-unit>
+            <trans-unit id="facilities_bathtub">
+                <source>facilities_bathtub</source>
+                <target>Bathtub</target>
+            </trans-unit>
+            <trans-unit id="facilities_bar">
+                <source>facilities_bar</source>
+                <target>Bar</target>
+            </trans-unit>
+            <trans-unit id="facilities_sofa">
+                <source>facilities_sofa</source>
+                <target>Sofa</target>
+            </trans-unit>
+            <trans-unit id="facilities_tv">
+                <source>facilities_tv</source>
+                <target>Tv</target>
+            </trans-unit>
+            <trans-unit id="facilities_cable_internet">
+                <source>facilities_cable_internet</source>
+                <target>Cable Internet</target>
+            </trans-unit>
+            <trans-unit id="facilities_wifi">
+                <source>facilities_wifi</source>
+                <target>WiFi</target>
+            </trans-unit>
+            <trans-unit id="facilities_dinning_table">
+                <source>facilities_dinning_table</source>
+                <target>Dinning Table</target>
+            </trans-unit>
+            <trans-unit id="facilities_washing_machine">
+                <source>facilities_washing_machine</source>
+                <target>Washing Machine</target>
+            </trans-unit>
+            <trans-unit id="facilities_dishwashing_machine">
+                <source>facilities_dishwashing_machine</source>
+                <target>Dishwashing Machine</target>
+            </trans-unit>
+            <trans-unit id="facilities_microwave">
+                <source>facilities_microwave</source>
+                <target>Microwave</target>
+            </trans-unit>
+            <trans-unit id="facilities_kitchen_utensil">
+                <source>facilities_kitchen_utensil</source>
+                <target>Kitchen Utensil</target>
+            </trans-unit>
+            <trans-unit id="facilities_seaview">
+                <source>facilities_seaview</source>
+                <target>Sea View</target>
+            </trans-unit>
+            <trans-unit id="facilities_pool">
+                <source>facilities_pool</source>
+                <target>Pool</target>
+            </trans-unit>
+            <trans-unit id="facilities_gym">
+                <source>facilities_gym</source>
+                <target>Gym</target>
+            </trans-unit>
+
+
+            <trans-unit id="building_info">
+                <source>building_info</source>
+                <target>Thông tin về tòa nhà</target>
+            </trans-unit>
+            <trans-unit id="building_floors">
+                <source>building_floors</source>
+                <target>Tầng xây dựng</target>
+            </trans-unit>
+
+
+            <trans-unit id="estate-item-moreinfo">
+                <source>estate-item-moreinfo</source>
+                <target>Thêm thông tin</target>
+            </trans-unit>
+            <trans-unit id="estate-item-streetview">
+                <source>estate-item-streetview</source>
+                <target>Street view</target>
+            </trans-unit>
+            <trans-unit id="month-short">
+                <source>month-short</source>
+                <target>th</target>
+            </trans-unit>
+            <trans-unit id="years">
+                <source>years</source>
+                <target>năm</target>
+            </trans-unit>
+
+            <trans-unit id="template_base_title">
+                <source>template_base_title</source>
+                <target>Bất động sản tại Việt Nam, mua và cho thuê căn hộ - Viet-Info.com</target>
+            </trans-unit>
+
+            <trans-unit id="send_request">
+                <source>send_request</source>
+                <target>Gửi yêu cầu</target>
+            </trans-unit>
+            <trans-unit id="send_message">
+                <source>send_message</source>
+                <target>Gửi tin nhắn</target>
+            </trans-unit>
+            <trans-unit id="call_me">
+                <source>call_me</source>
+                <target>Gọi cho tôi</target>
+            </trans-unit>
+            <trans-unit id="timezone">
+                <source>timezone</source>
+                <target>Timezone</target>
+            </trans-unit>
+            <trans-unit id="call_time">
+                <source>call_time</source>
+                <target>Call time</target>
+            </trans-unit>
+
+            <trans-unit id="your_name">
+                <source>your_name</source>
+                <target>Your name</target>
+            </trans-unit>
+            <trans-unit id="email">
+                <source>email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="phone">
+                <source>phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="send_me_letter_copy">
+                <source>send_me_letter_copy</source>
+                <target>Send Me copy of letter</target>
+            </trans-unit>
+            <trans-unit id="message_text">
+                <source>message_text</source>
+                <target>Text of message</target>
+            </trans-unit>
+            <trans-unit id="send_message_default_text">
+                <source>send_message_default_text</source>
+                <target>Hello! I'm interested in object №%id%. Send me more information please</target>
+            </trans-unit>
+            <trans-unit id="request_sent_success">
+                <source>request_sent_success</source>
+                <target>Request successfully sent</target>
+            </trans-unit>
+
+
+        </body>
+    </file>
+</xliff>

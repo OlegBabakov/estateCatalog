@@ -1,0 +1,59 @@
+<div class="navbar navbar-main navbar-custom navbar-fixed-top">
+    <div class="navbar-header"><a class="navbar-brand" href="{{ path('mainpage') }}"><i class="fa fa-home" aria-hidden="true"></i> Viet Info</a>
+        <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li class="active"><a href="{{ path('map') }}">{{ 'map'|trans }}</a></li>
+            {#<li><a href="#">{{ 'navbar_catalog'|trans }}</a></li>#}
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+            {% include '@Catalog/template/navbar/localization.html.twig' %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('sonata_admin_dashboard') }}">
+                        <i class="fa fa-cogs fa-lg"></i>
+                        Администрирование
+                    </a>
+                </li>
+            {% endif %}
+
+            {#Dropdown#}
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <li>
+                    <a href="{{ path('cabinet_mainpage') }}" title="{{ 'user_account'|trans }}">
+                        <i class="fa fa-user fa-lg"></i>
+                        {{ app.user.username }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}" title="{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}">
+                        <i class="fa fa-sign-out fa-lg"></i>
+                        {#{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}#}
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ path('fos_user_security_login') }}">
+                        <i class="fa fa-user fa-lg"></i>
+                        {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('fos_user_registration_register') }}">
+                        {#<i class="fa fa-user fa-lg"></i>#}
+                        {{ 'layout.register'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+
+    </div>
+</div>

@@ -1,0 +1,258 @@
+{#Конейнер в при листинге списка объектов недвижимости на карте в sidebar #}
+<script type="text/x-handlebars-template" id="estate-list-template">
+    <a class="row sidebar-list-item" href="{{'{{url}}'}}" target="_blank" data-estate-list-id="{{'{{estate.estateManagerListId}}'}}">
+
+            <div class="col-md-6">
+                <div class="image-container">
+                    {{'{{#if estate.gallery.length}}'}}
+                        <div id="{{'{{frameId}}'}}" style="width: 100%; height: {{'{{frameHeight}}'}}px; overflow:hidden;" class="frameScrub">
+                            {{'{{#each estate.gallery}}'}}
+                                {{'{{#ifCond @index "<" 4}}'}} {#Показывать только 4 картинки в превью#}
+                                    <img data-src="{{'{{this.publicData.thumbUrl}}'}}" src="/img/sidebar-home-preload.png" class="estate-thumb lazy" />
+                                {{'{{/ifCond}}'}}
+                            {{'{{/each}}'}}
+                        </div>
+
+                        <div class="img-counter">
+                            <i class="fa fa-camera" aria-hidden="true"></i>
+                            <span id="{{'{{frameId}}'}}-imgCounter">1</span> / {{'{{estate.gallery.length}}'}}
+                        </div>
+                    {{'{{else}}'}}
+                        <img data-src="{{'{{image.thumbUrl}}'}}" src="/img/sidebar-home-preload.png" class="estate-thumb lazy" />
+                    {{'{{/if}}'}}
+
+                    {{'{{#ifIn "seaview" estate.data.facilities}}'}}
+                        <img src="{{ asset('img/icon/seaview.png') }}" title="{{ 'facilities_seaview'|trans }}" class="icon-seaview" />
+                    {{'{{/ifIn}}'}}
+
+                    {{'{{#each estate.gallery}}'}}
+                        {{'{{#if this.publicData.isVideo}}'}} {#Показывать только 4 картинки в превью#}
+                            <div class="sidebar-video-play" data-estate-list-id="{{'{{../estate.estateManagerListId}}'}}" data-media-id="{{'{{@index}}'}}">
+                                <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+                            </div>
+                        {{'{{/if}}'}}
+                    {{'{{/each}}'}}
+                </div>
+            </div>
+            {{'{{#with estate}}'}}
+                <div class="col-md-6 result-text">
+                    {{'{{#if title}}'}}
+                        {{'{{#ifCond estateType "==" "building"}}'}}
+                            <i class="fa fa-building-o fa-fw" aria-hidden="true"></i>
+                            <span class="price" title="{{ 'estate_type_building'|trans }}">{{'{{title}}'}}</span>
+                        {{'{{else}}'}}
+                            <span class="price">{{'{{title}}'}}</span>
+                        {{'{{/ifCond}}'}}
+                        <br>
+                    {{'{{/if}}'}}
+
+                    {{'{{#if priceSell}}'}}
+                        <i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="price" title="{{ 'price_sell'|trans }}">{{'{{formatNumber (round priceSell)}}'}} {{ currencySymbol|raw }}</span><br>
+                    {{'{{/if}}'}}
+
+                    {{'{{#if priceRent}}'}}
+                        <i class="fa fa-key fa-fw" aria-hidden="true"></i><span class="price" title="{{ 'price_rent'|trans }}">{{'{{formatNumber (round priceRent)}}'}} {{ currencySymbol|raw }}/{{ 'month-short'|trans }}</span><br>
+                    {{'{{/if}}'}}
+
+                    {{'{{#if data.area.total}}'}}
+                        <i class="fa fa-square-o fa-fw" aria-hidden="true"></i>
+                        <span title="{{ 'estate_area'|trans }}">
+                            {{'{{data.area.total}}'}} m<sup>2</sup>
+                        </span><br>
+                    {{'{{/if}}'}}
+
+            {{'{{/with}}'}}
+            {{'{{#with estate}}'}}
+
+                    {{'{{#ifCond data.floor "||" data.building.floors}}'}}
+                        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+                            {{'{{#ifCond estateType "!=" "building"}}'}}
+                                <span title="{{ 'estate_floor'|trans }}">
+                                    {{'{{#if data.floor}}'}}
+                                        {{'{{data.floor}}'}}
+                                    {{'{{else}}'}}
+                                        ?
+                                    {{'{{/if}}'}}
+                                </span>
+
+                                {{'{{#if data.building.floors}}'}}
+                                    /&nbsp;
+                                {{'{{/if}}'}}
+                            {{'{{/ifCond}}'}}
+
+                            {{'{{#if data.building.floors}}'}}
+                                <span title="{{ 'building_floors'|trans }}">
+                                    {{'{{data.building.floors}}'}}
+                                </span>
+                            {{'{{/if}}'}}
+                        <br>
+                    {{'{{/ifCond}}'}}
+
+                    {{'{{#with data}}'}}
+
+                        {{'{{#if building.construction.year}}'}}
+                            <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                            <span title="{{ 'construction_year'|trans }}">
+                                {{'{{building.construction.year}}'}}
+                            </span><br>
+                        {{'{{/if}}'}}
+
+                        {{'{{#with rooms}}'}}
+                            {{'{{#if bedroom}}'}}
+                                <div title="{{ 'estate_rooms_bedroom'|trans }}" class="sidebar-item-rooms">
+                                    <i class="fa fa-bed fa-fw rooms" aria-hidden="true">{{'{{bedroom}}'}}</i>
+                                </div>
+                            {{'{{/if}}'}}
+                            {{'{{#if bathroom}}'}}
+                                <div title="{{ 'estate_rooms_bath'|trans }}" class="sidebar-item-rooms">
+                                    <i class="fa fa-shower fa-fw rooms" aria-hidden="true">{{'{{bathroom}}'}}</i>
+                                </div>
+                            {{'{{/if}}'}}
+                            {{'{{#if parking}}'}}
+                                <div title="{{ 'estate_rooms_parking'|trans }}" class="sidebar-item-rooms">
+                                    <i class="fa fa-car fa-fw rooms" aria-hidden="true">{{'{{parking}}'}}</i>
+                                </div>
+                            {{'{{/if}}'}}
+                        {{'{{/with}}'}}
+                    {{'{{/with}}'}}
+
+                    {#<div class="actions">#}
+                        {#<div class="btn btn-default">#}
+                            {#<i class="fa fa-ban" aria-hidden="true"></i>#}
+                        {#</div>#}
+
+                        {#<div class="btn btn-default" style="#}
+                            {#color: #ffffff;#}
+                            {#background: #e15054;#}
+                            {#border: 1px solid #d9494e;#}
+                        {#">#}
+                            {#<i class="fa fa-heart" aria-hidden="true" ></i>#}
+                        {#</div>#}
+
+                    {#</div>#}
+                </div>
+            {{'{{/with}}'}}
+    </a>
+</script>
+
+{#Контейнер(infowindow) на карте при клике на маркер#}
+<script type="text/x-handlebars-template" id="marker-infowindow-template">
+
+    <div class="marker-infowindow">
+
+            <div class="col-md-6 infowindow-image-container">
+                <a href="{{'{{url}}'}}" target="_blank">
+                    <img src="/img/sidebar-home-preload.png" data-src="{{'{{estate.image.thumbUrl}}'}}" class="estate-thumb infowindow-lazy" />
+                </a>
+
+                {{'{{#ifIn "seaview" estate.data.facilities}}'}}
+                    <img src="{{ asset('img/icon/seaview.png') }}" title="{{ 'facilities_seaview'|trans }}" class="icon-seaview" />
+                {{'{{/ifIn}}'}}
+
+                {{'{{#each estate.gallery}}'}}
+                    {{'{{#if this.publicData.isVideo}}'}} {#Показывать только 4 картинки в превью#}
+                        <div class="sidebar-video-play" data-estate-list-id="{{'{{../estate.estateManagerListId}}'}}" data-media-id="{{'{{@index}}'}}">
+                            <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+                        </div>
+                    {{'{{/if}}'}}
+                {{'{{/each}}'}}
+            </div>
+
+
+            {{'{{#with estate}}'}}
+                <div class="col-md-6 result-text gap-v-sm p-l-2">
+                    {{'{{#if title}}'}}
+                        <span class="price">{{'{{title}}'}}</span><br>
+                    {{'{{/if}}'}}
+
+                    {{'{{#if priceSell}}'}}
+                        <i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="price" title="{{ 'price_sell'|trans }}">{{'{{formatNumber (round priceSell)}}'}} {{ currencySymbol|raw }}</span><br>
+                    {{'{{/if}}'}}
+
+                    {{'{{#if priceRent}}'}}
+                        <i class="fa fa-key fa-fw" aria-hidden="true"></i><span class="price" title="{{ 'price_rent'|trans }}">{{'{{formatNumber (round priceRent)}}'}} {{ currencySymbol|raw }}/{{ 'month-short'|trans }}</span><br>
+                    {{'{{/if}}'}}
+
+                    {{'{{#if data.area.total}}'}}
+                    <i class="fa fa-square-o fa-fw" aria-hidden="true"></i>
+                        <span title="{{ 'estate_area'|trans }}">
+                            {{'{{data.area.total}}'}} m<sup>2</sup>
+                        </span><br>
+                    {{'{{/if}}'}}
+
+                    {{'{{#ifCond data.floor "||" data.building.floors}}'}}
+                        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+                        {{'{{#ifCond estateType "!=" "building"}}'}}
+
+                            <span title="{{ 'estate_floor'|trans }}">
+                                {{'{{#if data.floor}}'}}
+                                    {{'{{data.floor}}'}}
+                                {{'{{else}}'}}
+                                    ?
+                                {{'{{/if}}'}}
+                            </span>
+
+                            {{'{{#if data.building.floors}}'}}
+                                /&nbsp;
+                            {{'{{/if}}'}}
+                        {{'{{/ifCond}}'}}
+
+                        {{'{{#if data.building.floors}}'}}
+                            <span title="{{ 'building_floors'|trans }}">
+                                {{'{{data.building.floors}}'}}
+                            </span>
+                        {{'{{/if}}'}}
+                        <br>
+                    {{'{{/ifCond}}'}}
+
+                    {{'{{#with data}}'}}
+
+                        {{'{{#if building.construction.year}}'}}
+                            <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                            <span title="{{ 'construction_year'|trans }}">
+                                {{'{{building.construction.year}}'}}
+                            </span><br>
+                        {{'{{/if}}'}}
+
+                        {{'{{#with rooms}}'}}
+                            {{'{{#if bedroom}}'}}
+                                <div title="{{ 'estate_rooms_bedroom'|trans }}" class="sidebar-item-rooms">
+                                    <i class="fa fa-bed fa-fw rooms" aria-hidden="true">{{'{{bedroom}}'}}</i>
+                                </div>
+                            {{'{{/if}}'}}
+                            {{'{{#if bathroom}}'}}
+                                <div title="{{ 'estate_rooms_bath'|trans }}" class="sidebar-item-rooms">
+                                    <i class="fa fa-shower fa-fw rooms" aria-hidden="true">{{'{{bathroom}}'}}</i>
+                                </div>
+                            {{'{{/if}}'}}
+                            {{'{{#if parking}}'}}
+                                <div title="{{ 'estate_rooms_parking'|trans }}" class="sidebar-item-rooms">
+                                    <i class="fa fa-car fa-fw rooms" aria-hidden="true">{{'{{parking}}'}}</i>
+                                </div>
+                            {{'{{/if}}'}}
+                        {{'{{/with}}'}}
+                    {{'{{/with}}'}}
+
+                    {#<div class="actions">#}
+                    {#<div class="btn btn-default">#}
+                    {#<i class="fa fa-ban" aria-hidden="true"></i>#}
+                    {#</div>#}
+
+                    {#<div class="btn btn-default" style="#}
+                    {#color: #ffffff;#}
+                    {#background: #e15054;#}
+                    {#border: 1px solid #d9494e;#}
+                    {#">#}
+                    {#<i class="fa fa-heart" aria-hidden="true" ></i>#}
+                    {#</div>#}
+
+                    {#</div>#}
+                </div>
+            {{'{{/with}}'}}
+
+            <div class="infowindow-controls">
+                <a class="btn btn-default panorama-btn" href="#" data-lat="{{'{{estate.lat}}'}}" data-lng="{{'{{estate.lng}}'}}">{{ 'estate-item-streetview'|trans }}</a>
+                <a class="btn btn-primary more-btn" href="{{'{{url}}'}}" target="_blank">{{ 'estate-item-moreinfo'|trans }}</a>
+            </div>
+    </div>
+</script>

@@ -1,0 +1,14 @@
+services:
+
+    rest_api.serializer:
+        class: RestApiBundle\Service\SerializerService
+
+
+#    ----------------------------------------------------------------
+    rest_api.album_manager:
+        class: RestApiBundle\Service\AlbumManager
+        arguments: ["@doctrine", "@request_stack", '@rest_api.serializer']
+
+    rest_api.media_manager:
+        class: RestApiBundle\Service\MediaManager
+        arguments: ["@doctrine", "@request_stack", '@rest_api.serializer', '@knp_paginator', '@templating.engine.twig']

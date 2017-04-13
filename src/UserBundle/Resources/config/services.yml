@@ -1,0 +1,36 @@
+parameters:
+    user.manager.class: UserBundle\Service\UserManager
+    user.login_listener.class: UserBundle\Service\RegistrationListener
+    user.registration.form.type.class: UserBundle\Form\Type\RegistrationFormType
+
+services:
+#    user.example:
+#        class: UserBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+    user.admin.user:
+        class: UserBundle\Admin\UserAdmin
+        arguments: [~, UserBundle\Entity\User, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: user, label: Пользователи }
+
+    user.manager:
+        class: '%user.manager.class%'
+        arguments: ['@service_container']
+
+#Формы------------------------------------------------------------------------------------------------------------------
+    user.registration.form.type:
+        class: '%user.registration.form.type.class%'
+        tags:
+            - { name: form.type, alias: user_registration }
+
+#    TODO: разобраться зачем он был нужен (листенер события регистрации)
+#    user.login_listener:
+#        class: '%user.login_listener.class%'
+#        arguments: ['@router.default']
+#        tags:
+#            - {name: kernel.event_subscriber}
+
+#    user.repository:
+#        class: UserBundle\Repository\UserRepository
+#        calls:
+#            - [setCanonicalizer, ['@fos_user.util.canonicalizer.default']]

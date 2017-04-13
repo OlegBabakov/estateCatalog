@@ -1,0 +1,38 @@
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="buy">
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="rent">
+
+    </div>
+</div>
+
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col-md-12">
+        {{ form_row(form.estateType) }}
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-12">
+        <label class="control-label">Price</label>
+        <div class="row">
+            <div class="col-md-6" style="padding-right: 1px;">
+                {{ form_widget(form.priceMin) }}
+            </div>
+            <div class="col-md-6" style="padding-left: 1px;">
+                {{ form_widget(form.priceMax) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        {{ form_row(form.bedroomCount) }}
+    </div>
+</div>
+
+{{ form_end(form) }}

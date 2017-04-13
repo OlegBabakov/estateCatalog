@@ -1,0 +1,16 @@
+{% extends '@Catalog/template/base.html.twig' %}
+
+{% if form is defined %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% endif %}
+
+{% block body %}
+
+    <div class="row text-center" style="margin-top: 20px">
+        <div class="col-md-12">
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    </div>
+
+{% endblock %}

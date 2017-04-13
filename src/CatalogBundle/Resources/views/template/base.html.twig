@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+<head>
+    {% block head %}
+        <!-- META SECTION -->
+        <title>
+            {% block title %}{{ 'template_base_title'|trans }}{% endblock title %}
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        {% if showcase() %} {#FAVICON#}
+            <link rel="shortcut icon" href="{{ asset('img/icon/favicon/'~showcase().name~'.ico') }}" type="image/x-icon" />
+        {% endif %}
+
+        <!--[if lt IE 9]>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <!-- END META SECTION -->
+
+        {% block style %}
+            {% include '@Catalog/template/assetic_block.html.twig' with {block : 'app.css'} only %}
+        {% endblock style %}
+
+        {% block javascript %}
+            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js') }}?locales={{ app.request.locale|split('_')[0] }}"></script> {#TODO: Сделать чтобы на фронт не показывались все переводы#}
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+            {% include '@Catalog/template/assetic_block.html.twig' with {block : 'app_core.js'} only %}
+        {% endblock javascript %}
+    {% endblock head %}
+</head>
+<body>
+    {% block navbar %}
+        {% include '@Catalog/template/navbar/navbar.html.twig' %}
+    {% endblock navbar %}
+
+    {% block blueimp_controls %}
+        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="close">×</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+        </div>
+    {% endblock blueimp_controls %}
+
+    {% block body %}
+    {% endblock body %}
+
+    {% include '@Catalog/template/front/backend_globals_bridge.html.twig' %}
+
+    {% block analytics %}
+        {% if prodMode %}
+            {% include '@Catalog/widget/analytics/yandex_metrics.html.twig' %}
+        {% endif %}
+    {% endblock analytics %}
+</body>
+</html>

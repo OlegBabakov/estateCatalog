@@ -1,0 +1,110 @@
+{#Окно отправки сообщения агенту#}
+{% block sendMessage %}
+    {% if formSendMessage is defined %}
+        <div id="send-message-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    {% block sendMessageContent %}
+                        {% set form = formSendMessage %}
+                        {% form_theme form '@Catalog/form/theme/bootstrap_3_layout_custom.html.twig' %}
+                        {{ form_start(form) }}
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">{{ 'send_message'|trans }}</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                {% if success is defined and success %}
+                                    <div class="alert alert-success">
+                                        <b>{{ 'request_sent_success'|trans }}</b>
+                                    </div>
+                                {% endif %}
+
+                                {{ form_row(form.name) }}
+                                {{ form_row(form.email) }}
+                                {{ form_row(form.sendCopy) }}
+                                {{ form_row(form.text) }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'sidebar_hide_filter'|trans }}</button>
+                                {{ form_widget(form.submit) }}
+                            </div>
+                        {{ form_end(form) }}
+                    {% endblock sendMessageContent %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock sendMessage %}
+
+{#Окно отправки сообщения агенту#}
+<div id="call-me-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {% block callMeRequestContent %}
+                {% set form = formCallMeRequest %}
+                {% form_theme form '@Catalog/form/theme/bootstrap_3_layout_custom.html.twig' %}
+                {{ form_start(form) }}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ 'call_me'|trans }}</h4>
+                </div>
+                <div class="modal-body">
+
+                    {% if success is defined and success %}
+                        <div class="alert alert-success">
+                            <b>{{ 'request_sent_success'|trans }}</b>
+                        </div>
+                    {% endif %}
+
+                    {{ form_row(form.phone) }}
+
+                    <div class="row">
+                        <span style="display: inline-block; width: 100%; padding: 3px 15px;">{{ 'call_time'|trans }}</span>
+                        <div class="col-xs-6 time-range">
+                            <div>
+                                {{ form_widget(form.timeFrom) }}
+                            </div>
+                            <span>-</span>
+                            <div>
+                                {{ form_widget(form.timeTo) }}
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            {{ form_widget(form.timezone) }}
+                        </div>
+                    </div>
+
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'sidebar_hide_filter'|trans }}</button>
+                    {{ form_widget(form.submit) }}
+                </div>
+                {{ form_end(form) }}
+            {% endblock callMeRequestContent %}
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        function modalSubmitHandler(e) {
+            e.preventDefault();
+            var form = $(e.target);
+            $.ajax({
+                url : form.attr('action'),
+                type: 'POST',
+                data: form.serialize(),
+                success:function(result){
+                    form.parents('.modal-content').html(result.html)
+                    form.find('.select2').select2();
+                }
+
+            });
+        }
+
+        $('#send-message-modal, #call-me-modal').submit(modalSubmitHandler);
+    })
+</script>

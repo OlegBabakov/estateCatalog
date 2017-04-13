@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="ru" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="general">
+                <source>general</source>
+                <target>Основная</target>
+            </trans-unit>
+            <trans-unit id="title">
+                <source>title</source>
+                <target>Заголовок</target>
+            </trans-unit>
+            <trans-unit id="description">
+                <source>description</source>
+                <target>Описание</target>
+            </trans-unit>
+            <trans-unit id="gallery">
+                <source>gallery</source>
+                <target>Галерея</target>
+            </trans-unit>
+            <trans-unit id="location">
+                <source>location</source>
+                <target>Местоположение</target>
+            </trans-unit>
+            <trans-unit id="save">
+                <source>save</source>
+                <target>Сохранить</target>
+            </trans-unit>
+            <trans-unit id="construction_year">
+                <source>construction_year</source>
+                <target>Год постройки</target>
+            </trans-unit>
+            <trans-unit id="construction_quarter">
+                <source>construction_quarter</source>
+                <target>Квартал</target>
+            </trans-unit>
+            <trans-unit id="completion_percent">
+                <source>completion_percent</source>
+                <target>Процент завершенности</target>
+            </trans-unit>
+            <trans-unit id="found">
+                <source>found</source>
+                <target>Найдено</target>
+            </trans-unit>
+            <trans-unit id="not_set">
+                <source>not_set</source>
+                <target>Не задано</target>
+            </trans-unit>
+            <trans-unit id="share">
+                <source>share</source>
+                <target>Поделиться</target>
+            </trans-unit>
+            <trans-unit id="contacts">
+                <source>contacts</source>
+                <target>Контакты</target>
+            </trans-unit>
+            <trans-unit id="offers">
+                <source>offers</source>
+                <target>Предложения</target>
+            </trans-unit>
+            <trans-unit id="search">
+                <source>search</source>
+                <target>Поиск</target>
+            </trans-unit>
+
+            <trans-unit id="user_account">
+                <source>user_account</source>
+                <target>Кабинет пользователя</target>
+            </trans-unit>
+
+            <trans-unit id="message_estate_added">
+                <source>message_estate_added</source>
+                <target>Объект успешно добавлен</target>
+            </trans-unit>
+            <trans-unit id="message_estate_saved">
+                <source>message_estate_saved</source>
+                <target>Объект успешно сохранен</target>
+            </trans-unit>
+            <trans-unit id="message_save_error">
+                <source>message_save_error</source>
+                <target>Ошибка сохранения</target>
+            </trans-unit>
+            <trans-unit id="save_to_attach_gallery">
+                <source>save_to_attach_gallery</source>
+                <target>Пожалуйста сохраните объект недвижимости перед тем как добавлять к нему изображения</target>
+            </trans-unit>
+            <trans-unit id="message_saved">
+                <source>message_saved</source>
+                <target>Успешно сохранено</target>
+            </trans-unit>
+
+
+            <trans-unit id="price">
+                <source>price</source>
+                <target>Цена</target>
+            </trans-unit>
+            <trans-unit id="price_sell">
+                <source>price_sell</source>
+                <target>Цена продажи</target>
+            </trans-unit>
+            <trans-unit id="price_rent">
+                <source>price_rent</source>
+                <target>Цена аренды</target>
+            </trans-unit>
+            <trans-unit id="range_from">
+                <source>range_from</source>
+                <target>От</target>
+            </trans-unit>
+            <trans-unit id="range_to">
+                <source>range_to</source>
+                <target>До</target>
+            </trans-unit>
+            <trans-unit id="with_photos_only">
+                <source>with_photos_only</source>
+                <target>Только с фото</target>
+            </trans-unit>
+
+
+            <trans-unit id="map">
+                <source>map</source>
+                <target>Карта</target>
+            </trans-unit>
+            <trans-unit id="navbar_catalog">
+                <source>navbar_catalog</source>
+                <target>Каталог</target>
+            </trans-unit>
+
+            <trans-unit id="sidebar_show_filter">
+                <source>sidebar_show_filter</source>
+                <target>Изменить параметры поиска</target>
+            </trans-unit>
+            <trans-unit id="sidebar_hide_filter">
+                <source>sidebar_hide_filter</source>
+                <target>Скрыть</target>
+            </trans-unit>
+
+            <trans-unit id="filter_form_search">
+                <source>filter_form_search</source>
+                <target>Поиск</target>
+            </trans-unit>
+            <trans-unit id="clear">
+                <source>clear</source>
+                <target>Очистить</target>
+            </trans-unit>
+            <trans-unit id="filter_form_property_type">
+                <source>filter_form_property_type</source>
+                <target>Тип недвижимости</target>
+            </trans-unit>
+            <trans-unit id="filter_form_contract">
+                <source>filter_form_contract</source>
+                <target>Покупка / Аренда</target>
+            </trans-unit>
+            <trans-unit id="filter_form_price">
+                <source>filter_form_price</source>
+                <target>Цена</target>
+            </trans-unit>
+            <trans-unit id="filter_form_bedrooms">
+                <source>filter_form_bedrooms</source>
+                <target>Количество спален</target>
+            </trans-unit>
+            <trans-unit id="not_older">
+                <source>not_older</source>
+                <target>Не старше</target>
+            </trans-unit>
+            <trans-unit id="not_later">
+                <source>not_later</source>
+                <target>Не позже</target>
+            </trans-unit>
+            <trans-unit id="will_be_completed_this_year">
+                <source>will_be_completed_this_year</source>
+                <target>Сдача в этом году</target>
+            </trans-unit>
+            <trans-unit id="build_or_deadline_year">
+                <source>build_or_deadline_year</source>
+                <target>Год постройки или срок сдачи</target>
+            </trans-unit>
+            <trans-unit id="set_interval">
+                <source>set_interval</source>
+                <target>Указать точный интервал</target>
+            </trans-unit>
+
+            <trans-unit id="filter_form_choice_buy">
+                <source>filter_form_choice_buy</source>
+                <target>Купить</target>
+            </trans-unit>
+            <trans-unit id="filter_form_choice_rent">
+                <source>filter_form_choice_rent</source>
+                <target>Арендовать</target>
+            </trans-unit>
+
+            <trans-unit id="estate_type_building">
+                <source>estate_type_building</source>
+                <target>Строение / ЖК</target>
+            </trans-unit>
+            <trans-unit id="estate_type_apartment">
+                <source>estate_type_apartment</source>
+                <target>Апартаменты</target>
+            </trans-unit>
+            <trans-unit id="estate_type_hotel">
+                <source>estate_type_hotel</source>
+                <target>Отель</target>
+            </trans-unit>
+            <trans-unit id="estate_type_house">
+                <source>estate_type_house</source>
+                <target>Дома</target>
+            </trans-unit>
+            <trans-unit id="estate_type_land">
+                <source>estate_type_land</source>
+                <target>Земельный участок</target>
+            </trans-unit>
+            <trans-unit id="estate_type_office">
+                <source>estate_type_office</source>
+                <target>Офис</target>
+            </trans-unit>
+            <trans-unit id="estate_type_restaurant">
+                <source>estate_type_restaurant</source>
+                <target>Ресторан</target>
+            </trans-unit>
+
+
+            <trans-unit id="estate_property_type">
+                <source>estate_property_type</source>
+                <target>Тип недвижимости</target>
+            </trans-unit>
+            <trans-unit id="estate_description">
+                <source>estate_description</source>
+                <target>Описание</target>
+            </trans-unit>
+            <trans-unit id="estate_data">
+                <source>estate_data</source>
+                <target>Информация об объекте</target>
+            </trans-unit>
+            <trans-unit id="estate_rooms">
+                <source>estate_rooms</source>
+                <target>Количетсво комнат</target>
+            </trans-unit>
+            <trans-unit id="estate_rooms_bedroom">
+                <source>estate_rooms_bedroom</source>
+                <target>Спальни</target>
+            </trans-unit>
+            <trans-unit id="estate_rooms_bath">
+                <source>estate_rooms_bath</source>
+                <target>Ванная</target>
+            </trans-unit>
+            <trans-unit id="estate_rooms_parking">
+                <source>estate_rooms_parking</source>
+                <target>Парковочное место</target>
+            </trans-unit>
+            <trans-unit id="estate_area">
+                <source>estate_area</source>
+                <target>Площадь</target>
+            </trans-unit>
+            <trans-unit id="estate_area_total">
+                <source>estate_area_total</source>
+                <target>Общая</target>
+            </trans-unit>
+            <trans-unit id="estate_area_living">
+                <source>estate_area_living</source>
+                <target>Жилая</target>
+            </trans-unit>
+            <trans-unit id="estate_area_kitchen">
+                <source>estate_area_kitchen</source>
+                <target>Кухня</target>
+            </trans-unit>
+            <trans-unit id="estate_floor">
+                <source>estate_floor</source>
+                <target>Этаж</target>
+            </trans-unit>
+
+
+            <trans-unit id="estate_facilities">
+                <source>estate_facilities</source>
+                <target>Удобства</target>
+            </trans-unit>
+            <trans-unit id="facilities_security24">
+                <source>facilities_security24</source>
+                <target>Охрана 24ч</target>
+            </trans-unit>
+            <trans-unit id="facilities_aircond">
+                <source>facilities_aircond</source>
+                <target>Кондиционер</target>
+            </trans-unit>
+            <trans-unit id="facilities_fridge">
+                <source>facilities_fridge</source>
+                <target>Холодильник</target>
+            </trans-unit>
+            <trans-unit id="facilities_fan">
+                <source>facilities_fan</source>
+                <target>Вентилятор</target>
+            </trans-unit>
+            <trans-unit id="facilities_bed">
+                <source>facilities_bed</source>
+                <target>Кровать</target>
+            </trans-unit>
+            <trans-unit id="facilities_balcony">
+                <source>facilities_balcony</source>
+                <target>Балкон</target>
+            </trans-unit>
+            <trans-unit id="facilities_bathtub">
+                <source>facilities_bathtub</source>
+                <target>Ванна</target>
+            </trans-unit>
+            <trans-unit id="facilities_bar">
+                <source>facilities_bar</source>
+                <target>Бар</target>
+            </trans-unit>
+            <trans-unit id="facilities_sofa">
+                <source>facilities_sofa</source>
+                <target>Диван</target>
+            </trans-unit>
+            <trans-unit id="facilities_tv">
+                <source>facilities_tv</source>
+                <target>ТВ</target>
+            </trans-unit>
+            <trans-unit id="facilities_cable_internet">
+                <source>facilities_cable_internet</source>
+                <target>Кабельный интернет</target>
+            </trans-unit>
+            <trans-unit id="facilities_wifi">
+                <source>facilities_wifi</source>
+                <target>Wifi</target>
+            </trans-unit>
+            <trans-unit id="facilities_dinning_table">
+                <source>facilities_dinning_table</source>
+                <target>Обеденный стол</target>
+            </trans-unit>
+            <trans-unit id="facilities_washing_machine">
+                <source>facilities_washing_machine</source>
+                <target>Стиральная машина</target>
+            </trans-unit>
+            <trans-unit id="facilities_dishwashing_machine">
+                <source>facilities_dishwashing_machine</source>
+                <target>Посудомоечная машина</target>
+            </trans-unit>
+            <trans-unit id="facilities_microwave">
+                <source>facilities_microwave</source>
+                <target>Микроволновка</target>
+            </trans-unit>
+            <trans-unit id="facilities_kitchen_utensil">
+                <source>facilities_kitchen_utensil</source>
+                <target>Кухонная посуда</target>
+            </trans-unit>
+            <trans-unit id="facilities_seaview">
+                <source>facilities_seaview</source>
+                <target>Вид на море</target>
+            </trans-unit>
+            <trans-unit id="facilities_pool">
+                <source>facilities_pool</source>
+                <target>Бассейн</target>
+            </trans-unit>
+            <trans-unit id="facilities_gym">
+                <source>facilities_gym</source>
+                <target>Тренажерный зал</target>
+            </trans-unit>
+
+
+            <trans-unit id="building_info">
+                <source>building_info</source>
+                <target>Информация о здании</target>
+            </trans-unit>
+            <trans-unit id="building_floors">
+                <source>building_floors</source>
+                <target>Этажность здания</target>
+            </trans-unit>
+
+
+            <trans-unit id="estate-item-moreinfo">
+                <source>estate-item-moreinfo</source>
+                <target>Подробнее</target>
+            </trans-unit>
+            <trans-unit id="estate-item-streetview">
+                <source>estate-item-streetview</source>
+                <target>Панорамы</target>
+            </trans-unit>
+            <trans-unit id="month-short">
+                <source>month-short</source>
+                <target>мес</target>
+            </trans-unit>
+            <trans-unit id="years">
+                <source>years</source>
+                <target>лет</target>
+            </trans-unit>
+
+            <trans-unit id="template_base_title">
+                <source>template_base_title</source>
+                <target>Недвижимость во Вьетнаме, покупка и аренда квартир - Viet-Info.com</target>
+            </trans-unit>
+
+            <trans-unit id="send_request">
+                <source>send_request</source>
+                <target>Отправить запрос</target>
+            </trans-unit>
+            <trans-unit id="send_message">
+                <source>send_message</source>
+                <target>Отправить сообщение</target>
+            </trans-unit>
+            <trans-unit id="call_me">
+                <source>call_me</source>
+                <target>Перезвонить мне</target>
+            </trans-unit>
+            <trans-unit id="timezone">
+                <source>timezone</source>
+                <target>Часовой пояс</target>
+            </trans-unit>
+            <trans-unit id="call_time">
+                <source>call_time</source>
+                <target>Время звонка</target>
+            </trans-unit>
+
+            <trans-unit id="your_name">
+                <source>your_name</source>
+                <target>Ваше имя</target>
+            </trans-unit>
+            <trans-unit id="email">
+                <source>email</source>
+                <target>Электронная почта</target>
+            </trans-unit>
+            <trans-unit id="phone">
+                <source>phone</source>
+                <target>Телефон</target>
+            </trans-unit>
+            <trans-unit id="send_me_letter_copy">
+                <source>send_me_letter_copy</source>
+                <target>Отправить мне копию письма</target>
+            </trans-unit>
+            <trans-unit id="message_text">
+                <source>message_text</source>
+                <target>Текст сообщения</target>
+            </trans-unit>
+
+            <trans-unit id="send_message_default_text">
+                <source>send_message_default_text</source>
+                <target>Здравствуйте! Меня интересует объект №%id%. Пожалуйста, расскажите подробнее об этом варианте.</target>
+            </trans-unit>
+            <trans-unit id="request_sent_success">
+                <source>request_sent_success</source>
+                <target>Запрос успешно отправлен</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>

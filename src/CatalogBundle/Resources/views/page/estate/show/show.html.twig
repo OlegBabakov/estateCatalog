@@ -1,0 +1,424 @@
+{% extends '@Catalog/template/base.html.twig' %}
+
+{#{% form_theme filterForm 'bootstrap_3_layout.html.twig' %}#}
+
+{% block head %}
+    {{ parent() }}
+    {#<meta property="og:title" content="Приятный баг для новых пользователей Google AdSense"/>#}
+    {#<meta property="og:description" content="Описание новой ошибки в системе Google AdSense "/>#}
+    {#<meta property="og:type" content="article"/>#}
+    {#<meta property="og:image" content="https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">#}
+    {#<meta property="og:image:secure_ur" content="https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">#}
+    {#<meta property="og:url" content= "http:// pr-cy.ru/news/p/5396" />#}
+{% endblock head %}
+
+{% block body %}
+
+    <div id="scroll-spy" class="navbar navbar-fixed-top navbar-default" style="top:50px;">
+        <div class="navbar-inner">
+            <ul class="nav navbar-nav">
+                {% if estate.gallery %}
+                    <li><a href="#gallery">{{ 'gallery'|trans }}</a></li>
+                {% endif %}
+                <li><a href="#description">{{ 'description'|trans }}</a></li>
+                <li><a href="#location">{{ 'map'|trans }}</a></li>
+                {% if offers|length %}
+                    <li>
+                        <a href="#offers">
+                            {{ 'offers'|trans }}
+                            <span class="label label-info">{{ offers|length }}</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if estate.contactProfiles|length %}
+                    <li><a href="#contacts">{{ 'contacts'|trans }}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="container" id="main">
+
+        <div class="row">
+            <div class="col-md-12">
+                {% if estate.title %}
+                    <h1>{{ estate.title }}</h1>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9 estate-info">
+
+                <div class="row">
+                    {% if estate.priceSell or estate.priceRent %}
+                        <div class="col-md-6 col-sm-6">
+                            <div class="price-block head-block">
+                                <table width="100%">
+                                    {% if estate.priceSell %}
+                                        <tr>
+                                            <td><i class="fa fa-home fa-fw" aria-hidden="true"></i>{{ 'price_sell'|trans }}</td>
+                                            <td align="right">{{ estate.priceSell|price|raw }}</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if estate.priceRent %}
+                                        <tr>
+                                            <td><i class="fa fa-key fa-fw" aria-hidden="true"></i>{{ 'price_rent'|trans }}</td>
+                                            <td align="right">{{ estate.priceRent|price|raw }}</td>
+                                        </tr>
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="col-md-6 col-sm-6">
+                        <div class="head-block">
+                            {{ 'estate_property_type'|trans }}:<br>
+                            {{ ('estate_type_'~estate.estateType)|trans }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <a class="col-md-12 adress-link" href="#location">
+                        <i class="fa fa-fw fa-map-marker fa-2x" style="vertical-align: middle;" aria-hidden="true"></i>
+                        <span class="address">{{ [estate.address.country, estate.address.city, estate.address.streetName, estate.address.streetNumber]|join(', ') }}</span>
+                    </a>
+                </div>
+
+                {% if estate.data.building.construction.year %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <i class="fa fa-fw fa-clock-o fa-2x" style="vertical-align: middle;" aria-hidden="true"></i>
+                            <span style="font-size: 20px;">{{ 'build_or_deadline_year'|trans }}: <b>{{ estate.data.building.construction.year }}</b></span>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if estate.gallery %}
+                    <div id="gallery" class="row">
+                        <div class="col-md-12">
+                            {% include '@Catalog/widget/estate_media_gallery.html.twig' with {'gallery' : estate.gallery} only %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if estate.data.area.total %}
+                            <div class="estate-data-icon">
+                                <img src="{{ asset('img/icon/estate/area32.png') }}"> {{ 'estate_area'|trans }}: <b>{{ estate.data.area.total }}</b> m<sup>2</sup>
+                            </div>
+                        {% endif %}
+
+                        {% if estate.data.rooms.bedroom %}
+                            <div class="estate-data-icon">
+                                <img src="{{ asset('img/icon/estate/bed32.png') }}"> {{ 'estate_rooms_bedroom'|trans }}: <b>{{ estate.data.rooms.bedroom }}</b>
+                            </div>
+                        {% endif %}
+
+                        {% if estate.data.rooms.bathroom %}
+                            <div class="estate-data-icon">
+                                <img src="{{ asset('img/icon/estate/bath32.png') }}"> {{ 'estate_rooms_bath'|trans }}: <b>{{ estate.data.rooms.bathroom }}</b>
+                            </div>
+                        {% endif %}
+
+                        {% if estate.data.rooms.parking %}
+                            <div class="estate-data-icon">
+                                <img src="{{ asset('img/icon/estate/parking-spot32.png') }}"> {{ 'estate_rooms_parking'|trans }}: <b>{{ estate.data.rooms.parking }}</b>
+                            </div>
+                        {% endif %}
+
+                        {% if estate.data.floor or estate.data.building.floors %}
+                            <div class="estate-data-icon">
+                                <img src="{{ asset('img/icon/estate/floor32.png') }}">
+                                {% if estate.data.floor and estate.data.building.floors %}
+                                    {{ 'estate_floor'|trans }}: <b>{{ estate.data.floor }} <span style="font-family: monospace;">/</span> <span title="{{ 'building_floors'|trans }}">{{ estate.data.building.floors }}</span></b>
+                                {% elseif estate.data.floor %}
+                                    {{ 'estate_floor'|trans }}: <b>{{ estate.data.floor }}</b>
+                                {% else %}
+                                    {{ 'building_floors'|trans }}: <b>{{ estate.data.building.floors }}</b>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if estate.data.facilities %}
+                    <div class="row" style="margin-top: 0;">
+                        <div class="col-md-12">
+                            <h2>{{ 'estate_facilities'|trans }}</h2>
+                            {% for facility in estate.data.facilities %}
+                                {% set addClass = '' %}
+                                {% set addContent = '' %}
+                                {% if facility == 'seaview' %}
+                                    {% set addClass = 'facility-seaview' %}
+                                    {% set addContent = '<i class="fa fa-fw fa-sun-o" aria-hidden="true"></i>' %}
+                                {% endif %}
+                                <div class="estate-facilities-item {{ addClass }}">
+                                    {{ addContent|raw }} {{ ('facilities_'~facility)|trans }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div id="description" class="row">
+                    {% if estate.description[app.request.locale] is defined and estate.description[app.request.locale] %}
+                        <div class="col-md-12 description">
+                            <h2>{{ 'estate_description'|trans }}</h2>
+                            {{ estate.description[app.request.locale]|raw }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div id="location" class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#map"><i class="fa fa-fw fa-map-marker fa-2x" style="vertical-align: middle;" aria-hidden="true"></i> {{ 'map'|trans }}</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#street-view"><i class="fa fa-fw fa-street-view fa-2x" style="vertical-align: middle;" aria-hidden="true"></i> {{ 'estate-item-streetview'|trans }}</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="map" class="tab-pane fade in active">
+                                {% include '@Catalog/widget/map_single_marker.html.twig' with { 'lat' : estate.lat, 'lng' : estate.lng } only %}
+                            </div>
+                            <div id="street-view" class="tab-pane fade">
+                                {% include '@Catalog/widget/street_view.html.twig' with { 'lat' : estate.lat, 'lng' : estate.lng } only %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if offers|length %}
+                    <div id="offers" class="row">
+                        <div class="col-md-12">
+                        <h2>{{ 'offers'|trans }}</h2>
+                        {% include '@Catalog/page/estate/block/estate_child_offers.html.twig' with { estateList : offers } only %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row" style="margin-bottom: 100px;">
+                </div>
+
+
+            </div> {#END LEFT CONTAINER#}
+
+            <div id="control-bar" class="col-md-3" style="padding-top: 7px;">
+
+                <div class="row actions">
+                    {#<a class="btn btn-default" style="#}
+                        {#color: #ffffff;#}
+                        {#background: #e15054;#}
+                        {#border: 1px solid #d9494e;#}
+                    {#">#}
+                        {#<i class="fa fa-heart" aria-hidden="true" ></i>#}
+                    {#</a>#}
+
+                    {#<a class="btn btn-primary">#}
+                        {#<i class="fa fa-list-ul" aria-hidden="true"></i>#}
+                    {#</a>#}
+
+                    {#<a class="btn btn-default">#}
+                        {#<i class="fa fa-ban" aria-hidden="true"></i>#}
+                    {#</a>#}
+
+                    {% include '@Catalog/widget/social_share_button.html.twig' %}
+
+                    {#<a class="btn btn-default">#}
+                        {#<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>#}
+                    {#</a>#}
+                </div>
+                <hr>
+
+                {% for user in estate.contactProfiles %}
+                    {% include '@Catalog/page/estate/block/user_profile.html.twig' with {user: user, showActions: true} only %}
+                {% endfor %}
+
+            </div> {#END RIGHT CONTAINER#}
+
+        </div>
+    </div>
+
+    {% include '@Catalog/page/estate/show/modal.html.twig' with {
+        formSendMessage   : formSendMessage,
+        formCallMeRequest : formCallMeRequest
+    } only %}
+
+    <style>
+        #main {
+            cursor: default;
+        }
+
+        #map, #street-view {
+            height: 400px;
+            width: 100%;
+        }
+
+        .estate-data-icon {
+            text-align: center;
+            margin-top: 10px;
+            margin-right: 30px;
+            display: inline-block;
+        }
+
+        .estate-data-icon img {
+            display: block;
+            margin: 0 auto 5px auto;
+        }
+
+        @media screen and (max-width: 1000px) {
+            .estate-data-icon {
+                min-width: 100px;
+            }
+        }
+
+        .price-block {
+        }
+
+        .head-block {
+            font-size: 22px;
+            padding: 5px 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,.2);
+            border: 1px solid #e1e1e1;
+        }
+
+        .estate-facilities-item {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #ffffff;
+            box-shadow: 0 1px 4px rgba(0,0,0,.2);
+            border: 1px solid #e1e1e1;
+            margin-right: 3px;
+            margin-top: 8px;
+        }
+
+        .estate-info > .row {
+            margin-top: 15px;
+        }
+
+        .facility-seaview {
+            color: white;
+            background: dodgerblue;
+            border: 1px solid #2388ff;
+        }
+
+        .address {
+            cursor: pointer;
+            top: 4px;
+            position: relative;
+            font-size: 20px;
+        }
+
+        .actions {
+            margin: 10px auto;
+        }
+
+        .btn-full-width {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .social-buttons li {
+            display: inline-block;
+        }
+
+        body {
+            background-image: url("{{ asset('img/background/2.jpg') }}");
+            background-size: cover!important;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .container {
+            background: white;
+            margin-top: 70px;
+        }
+
+        .time-range > div {
+            display: inline-block;
+            width: 45%;
+        }
+        .time-range > span {
+            display: inline-block;
+        }
+
+
+        #scroll-spy .nav>li {
+            float:left;
+        }
+
+        #scroll-spy .navbar-nav {
+            margin: 0;
+        }
+
+        .navbar-main {
+            z-index: 1031; {#Чтобы нижний navbar не перекрывал dropdown именю основного navbar#}
+        }
+
+        .clild-offer {
+            display: block;
+            padding: 10px 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #d5d5d5;
+        }
+
+        .clild-offer:hover {
+            background: #f0f0f0;
+        }
+
+    </style>
+
+    <script>
+        $(function () {
+            initMap();
+            var navbarsOffset = 110;
+
+//            $('body').scrollspy({target: "#scroll-spy", offset: navbarsOffset});
+            $("#scroll-spy a, .adress-link").on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+
+                    $('html, body').animate(
+                        {scrollTop: $(hash).offset().top - navbarsOffset},
+                        500,
+                        function(){window.location.hash = hash;}
+                    );
+                }
+            });
+
+            $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) { //переключение табов
+                var target = $(this).attr('href');
+                if (target == '#map') initMap();
+                if (target == '#street-view') initStreetView();
+            });
+
+            $('.lazy').lazy({
+                afterLoad: function(element) {
+
+                    $(".frameScrub").frameScrub({
+                        verticalAlignment: 'middle'
+                    });
+                }
+            });
+
+            $('#contacts .actions .btn').click(function () {
+                var modal = $($(this).data('target'));
+                modal.find('.recipient').val(
+                    $(this).data('user-id')
+                );
+                modal.find('.alert').hide();
+                modal.modal('show');
+            });
+
+        });
+    </script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key={{ google_map_apikey }}"></script>
+{% endblock body %}

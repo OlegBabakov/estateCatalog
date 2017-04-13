@@ -1,0 +1,130 @@
+CatalogBundle\Entity\Estate:
+    type: entity
+    table: null
+    repositoryClass: CatalogBundle\Repository\EstateRepository
+    gedmo:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
+        tree:
+            type: nested
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        root:
+            targetEntity: Estate
+            joinColumn:
+                referencedColumnName: id
+#                onDelete: CASCADE
+            gedmo:
+                - treeRoot
+        parent:
+            targetEntity: Estate
+            inversedBy: children
+            joinColumn:
+                referencedColumnName: id
+#                onDelete: CASCADE
+            gedmo:
+                - treeParent
+        creator:
+            targetEntity: UserBundle\Entity\User
+            joinColumn:
+                referencedColumnName: id
+    oneToMany:
+        gallery:
+            targetEntity: EstateMedia
+            mappedBy: estate
+            cascade: [remove]
+            orderBy:
+                position: ASC
+        children:
+            targetEntity: Estate
+            mappedBy: parent
+            orderBy:
+                treeLeft: ASC
+    manyToMany: # One-To-Many, Unidirectional with Join Table
+        contactProfiles:
+            targetEntity: UserBundle\Entity\User
+            joinTable:
+                name: estate_contact_users
+                joinColumns:
+                    estate_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE
+                inverseJoinColumns:
+                    user_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE
+    fields:
+        lat: #lattitude
+            type: float
+            nullable: true
+        lng: #longitude
+            type: float
+            nullable: true
+        address: #JSON array with address data
+            type: json
+            nullable: true
+            options:
+                jsonb: true
+        priceSell: #sell price
+            type: integer
+            nullable: true
+        priceRent: #rent price
+            type: integer
+            nullable: true
+        estateType: #type of property: villa, hotel, land
+            type: string
+            length: 20
+            nullable: true
+        image: #JSON array with image data
+            type: json
+            nullable: true
+            options:
+                jsonb: true
+        title:
+            type: string
+            nullable: true
+        description:
+            type: json
+            nullable: true
+            options:
+                jsonb: true
+        data:
+            type: json
+            nullable: true
+            options:
+                jsonb: true
+        treeLeft: #nested set: левый ключ
+            type: integer
+            gedmo:
+              - treeLeft
+        treeRight: #nested set: правый ключ
+            type: integer
+            gedmo:
+              - treeRight
+        treeLevel: #nested set: уровень вложенности
+            type: integer
+            gedmo:
+              - treeLevel
+
+        #временные метки
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        deletedAt:
+            type: date
+            nullable: true
+
+    lifecycleCallbacks: {  }

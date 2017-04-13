@@ -1,0 +1,22 @@
+{% set flashbag = app.session.flashbag.all() %}
+{% if flashbag is not empty %}
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in flashbag %}
+            <div class="note note-{{ type }} flashbag-block">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function() {
+                $('.flashbag-block').slideUp(500);
+            }, 10000);
+        });
+    </script>
+
+{% endif %}
